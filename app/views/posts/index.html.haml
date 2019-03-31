@@ -6,16 +6,13 @@
   
   %p= link_to 'New Post', new_post_path
     
-  %table.scroll
-    %tbody
-      -@posts.each do |post|
-        %tr.a_post
-          %tr.image= image_tag post.image.attached? ? post.image.variant(resize: "100x100^") : 'noimg.jpeg'
-          %br
-          %tr.caption= post.caption
-          %br
-          %tr.location= post.location
-          %br
+  .scroll
+    -@posts.each do |post|
+      .a_post
+        %p.image= image_tag post.image.attached? ? post.image.variant(resize: "100x100^") : 'noimg.jpeg'
+        %p.caption= "#{post.caption}"
+        %p.location= "#{post.location}"
+      %br
 
     
       
