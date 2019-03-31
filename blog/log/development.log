@@ -2041,3 +2041,71 @@ Processing by PostsController#index as HTML
 Completed 200 OK in 58ms (Views: 55.5ms | ActiveRecord: 0.2ms)
 
 
+Started GET "/posts" for ::1 at 2019-03-31 13:12:53 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /usr/local/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.haml:5
+  Rendered posts/index.html.haml within layouts/application (21.0ms)
+Completed 200 OK in 279ms (Views: 258.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/posts/new" for ::1 at 2019-03-31 13:12:56 -0400
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.haml within layouts/application
+  Rendered posts/_form.html.haml (19.6ms)
+  Rendered posts/new.html.haml within layouts/application (22.4ms)
+Completed 200 OK in 54ms (Views: 52.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/posts" for ::1 at 2019-03-31 13:13:02 -0400
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jt2QPsXkzbgk37JmaqBWAAYmhvwT3fxxqAQfxZmGQ5YnKv6magO01CDumTakD2U/18gqnfyD7lwQaIpgt79XtA==", "post"=>{"caption"=>"anotha one", "rating"=>"1", "location"=>"", "time"=>"", "tags"=>""}, "commit"=>"Create Post"}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:30
+  [1m[36mPost Create (0.5ms)[0m  [1m[32mINSERT INTO "posts" ("caption", "rating", "location", "time", "tags", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["caption", "anotha one"], ["rating", 1], ["location", ""], ["time", ""], ["tags", ""], ["created_at", "2019-03-31 17:13:02.391888"], ["updated_at", "2019-03-31 17:13:02.391888"]]
+  ↳ app/controllers/posts_controller.rb:30
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:30
+Redirected to http://localhost:3000/posts/5
+Completed 302 Found in 10ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/posts/5" for ::1 at 2019-03-31 13:13:02 -0400
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:67
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (6.3ms)
+Completed 200 OK in 47ms (Views: 41.0ms | ActiveRecord: 0.3ms)
+
+
+Started DELETE "/posts/5" for ::1 at 2019-03-31 13:13:05 -0400
+Processing by PostsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"U+0KlZHIR3tJ//kdzFzBe1oBt0BkOH5Qgdmln6oIaJdB645YMjf2fcfLZ9DD/yDaEmFxqTl433Ms+KTx13DuKQ==", "id"=>"5"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:67
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:57
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 5]]
+  ↳ app/controllers/posts_controller.rb:57
+  [1m[36mPost Destroy (0.4ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 5]]
+  ↳ app/controllers/posts_controller.rb:57
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:57
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 24ms (ActiveRecord: 2.9ms)
+
+
+Started GET "/posts" for ::1 at 2019-03-31 13:13:05 -0400
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.haml:5
+  Rendered posts/index.html.haml within layouts/application (11.9ms)
+Completed 200 OK in 55ms (Views: 52.5ms | ActiveRecord: 0.8ms)
+
+
