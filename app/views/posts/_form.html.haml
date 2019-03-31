@@ -1,30 +1,26 @@
-= form_with(model: post, local: true) do |form|
-  - if post.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(post.errors.count, "error")
-        prohibited this post from being saved:
-      %ul
-        - post.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = form.label :caption
-    = form.text_field :caption
-  .field
-    = form.label :rating
-    = form.number_field :rating
-  .field
-    = form.label :location
-    = form.text_field :location
-  .field
-    = form.label :time
-    = form.text_field :time
-  .field
-    = form.label :tags
-    = form.text_area :tags
-  .field
-    =form.label :image, "Image"
-    =form.file_field :image, accept: "image/png,image/gif,image/jpeg"
+%form
+  %fieldset
+    %legend 
+    .form-group.row
+  = form_with(model: post, local: true) do |form|
+    .form-group
+      = form.label :caption
+      = form.text_field :caption
+    .form-group
+      = form.label :rating
+      = form.number_field :rating
+    .form-group
+      = form.label :location
+      = form.text_field :location
+    .form-group
+      = form.label :time
+      = form.text_field :time
+    .form-group
+      = form.label :tags
+      = form.text_area :tags
+    .form-group
+      =form.label :image, "Image"
+      =form.file_field :image, accept: "image/png,image/gif,image/jpeg"
 
-  .actions
-    = form.submit "Create Post"
+    .actions
+      = form.submit "Create Post"
