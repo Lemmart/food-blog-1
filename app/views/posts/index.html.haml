@@ -1,15 +1,23 @@
-%p
-  #notice= notice
+#main.container
+
+  =form_tag posts_path, :method => :get do
+    = label_tag :search_term, "Search"
+    = text_field_tag :search_term
+  
+  %p= link_to 'New Post', new_post_path
+    
   %table.scroll
     %tbody
       -@posts.each do |post|
         %tr.a_post
-          %tr.fakeimg{:style => "height:200px;"} Image 
+          %tr.img{:style => "height:200px;"} Image 
           %br
           %tr.caption= post.caption
           %br
           %tr.location= post.location
-        
+          %br
+
+    
       
     -# .post
     -# %h2 TITLE HEADING
@@ -49,4 +57,4 @@
   -#         %td= link_to 'Edit', edit_post_path(post)
   -#         %td= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }
   -# %br/
-  = link_to 'New Post', new_post_path
+  

@@ -4,4 +4,20 @@
 
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
+$background-color: #343a40;
 
+.scroll {
+    position: relative;
+    top: 10px;
+    width: 80%;
+    left: 10%;
+    
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.a_post {
+    border: 5px black solid
+}
