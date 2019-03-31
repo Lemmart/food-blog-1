@@ -1,2 +1,3 @@
 # Don't track these files/folders
 blog/tmp/cache/bootsnap-compile-cache/
+blog/tmp/*
