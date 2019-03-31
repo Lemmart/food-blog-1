@@ -10,7 +10,7 @@
     %tbody
       -@posts.each do |post|
         %tr.a_post
-          %tr.img{:style => "height:200px;"} Image 
+          %tr.image= image_tag post.image.attached? ? post.image.variant(resize: "100x100^") : 'noimg.jpeg'
           %br
           %tr.caption= post.caption
           %br
