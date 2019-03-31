@@ -1,17 +1,43 @@
 #main.container
 
-  =form_tag posts_path, :method => :get do
-    = label_tag :search_term, "Search"
-    = text_field_tag :search_term
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    %a.navbar-brand{:href => "#"} Navbar
+    %button.navbar-toggler{"aria-controls" => "navbarColor03", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarColor03", "data-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarColor03.collapse.navbar-collapse
+      %ul.navbar-nav.mr-auto
+        %li.nav-item.active
+          %a.nav-link{:href => "#"}
+            Home
+            %span.sr-only (current)
+        %li.nav-item
+          %a.nav-link{:href => "#"} Features
+        %li.nav-item
+          %a.nav-link{:href => "#"} Pricing
+        %li.nav-item
+          %a.nav-link{:href => "#"} About
+      %form.form-inline.my-2.my-lg-0
+        %input.form-control.mr-sm-2{:placeholder => "Search", :type => "text"}/
+        %button.btn.btn-secondary.my-2.my-sm-0{:type => "submit"} Search
+
+        
+  -# =form_tag posts_path, :method => :get do
+  -#   = label_tag :search_term, "Search"
+  -#   = text_field_tag :search_term
   
   %p= link_to 'New Post', new_post_path
     
   .scroll
     -@posts.each do |post|
-      .a_post
+      .card.mb-3
+        .card-body
         %p.image= image_tag post.image.attached? ? post.image.variant(resize: "100x100^") : 'noimg.jpeg'
-        %p.caption= "#{post.caption}"
-        %p.location= "#{post.location}"
+        %p.card-text= "#{post.caption}"
+        %h6.card-subtitle.mb-2.text-muted= "#{post.location}"
+        .card-body
+          %a.card-link= link_to("Delete Post", post_path(post), method: :delete)
+        .card-footer.text-muted
+          %p.time= "#{post.time}"
       %br
 
     
