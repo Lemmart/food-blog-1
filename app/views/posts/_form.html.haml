@@ -22,5 +22,9 @@
   .field
     = form.label :tags
     = form.text_area :tags
+  .field
+    =form.label :image, "Image"
+    =form.file_field :image, accept: "image/png,image/gif,image/jpeg"
+
   .actions
-    = form.submit
+    = form.submit "Create Post"
