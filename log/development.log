@@ -3375,3 +3375,42 @@ puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
 Completed 200 OK in 155ms (Views: 152.1ms | ActiveRecord: 0.5ms)
 
 
+Started GET "/posts" for ::1 at 2019-03-31 17:03:26 -0400
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.haml:31
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 3], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.haml:34
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.haml:34
+  Rendered posts/index.html.haml within layouts/application (19.8ms)
+Completed 200 OK in 60ms (Views: 56.5ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/posts" for ::1 at 2019-03-31 17:10:18 -0400
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (1.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.haml:31
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 3], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.haml:34
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.haml:34
+  Rendered posts/index.html.haml within layouts/application (60.5ms)
+Completed 200 OK in 179ms (Views: 167.5ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/posts" for ::1 at 2019-03-31 17:11:56 -0400
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.haml:31
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 3], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.haml:34
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "Post"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.haml:34
+  Rendered posts/index.html.haml within layouts/application (59.6ms)
+Completed 200 OK in 133ms (Views: 121.8ms | ActiveRecord: 1.3ms)
+
+
