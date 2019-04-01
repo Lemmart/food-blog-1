@@ -37,16 +37,16 @@
         %p.comment Comments
         -post.comments.each do |c|
           %p #{c.username}: #{c.body}
-        -# %p.comment Add a comment:
-        -# =form_for([post, post.comments.build]) do |f|
-        -#   .field
-        -#   = f.label :username
-        -#   = f.text_field :username
-        -#   .field
-        -#   = f.label :body
-        -#   = f.text_area :body
-        -#   .actions
-        -#   = f.submit "Add comment"
+        %p.comment Add a comment:
+        =form_for([post, post.comments.build]) do |f|
+          .field
+          = f.label :username
+          = f.text_field :username
+          .field
+          = f.label :body
+          = f.text_area :body
+          .actions
+          = f.submit "Add comment"
     %br
       %br
       
