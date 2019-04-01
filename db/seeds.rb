@@ -5,3 +5,23 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Post.delete_all
+
+a = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+a.comments.create!(username: "anon", body: "best bagel ever")
+a.comments.create!(username: "yee", body: "why is there a hole in the middle? isnt that a donut?")
+
+b = Post.create!(caption: "Toast", rating: "1", location: "Frank", time: "10:00am", tags:"#burnt")
+b.comments.create!(username: "teacher", body: "how do you mess up toast?")
+b.comments.create!(username: "no one", body: "loved the toast")
+
+c = Post.create!(caption: "Eggs", rating: "3", location: "Coop", time: "12:00pm", tags:"#raw")
+c.comments.create!(username: "L", body: "no salt :(")
+
+d = Post.create!(caption: "Bacon", rating: "4", location: "Coop", time: "8:00am", tags:"#YUMMY")
+d.comments.create!(username: "meat lover", body: "bacons good, hard to mess up")
+
+e = Post.create!(caption: "Cereal", rating: "5", location: "Frank", time: "3:00am", tags:"#bestfoodever")
+e.comments.create!(username: "late nighter", body: "I live for the cereal!")
+e.comments.create!(username: "its late", body: "theres only cereal")
