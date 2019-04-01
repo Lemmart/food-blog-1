@@ -1,11 +1,13 @@
 #main.container
 
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light.sticky-top
-    %a.navbar-brand{:href => posts_path} Frank.ly
     %button.navbar-toggler{"aria-controls" => "navbarColor03", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarColor03", "data-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     #navbarColor03.collapse.navbar-collapse
       %ul.navbar-nav.mr-auto
+        %li.nav-item
+          %a.nav-link{:href => posts_path}
+            %img{:src => "FrankLyLogo.png", :alt => "Frank.ly"}
         %li.nav-item
           %a.nav-link{:href => "#"} Features
         %li.nav-item
