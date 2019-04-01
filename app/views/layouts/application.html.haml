@@ -2,14 +2,14 @@
 %html{ lang: 'en' }
   %head
     %meta{ charset: 'utf-8' }
-    %title Blog
+    %title Frank.ly
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
 
   %body
     #header 
-      %h1 Frank.ly
+      -# %h1 Frank.ly
       - if flash[:notice]
         %p{:class => 'alert alert-info', :role => 'alert'}= flash[:notice]
       - if flash[:warning]

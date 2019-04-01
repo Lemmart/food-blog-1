@@ -4,7 +4,26 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    # @posts = Post.all
+    s_params = search_params
+    if !s_params[:search].nil?
+      tag_ids = []
+
+      Post.all.each do |p|
+        if p.tags.include? s_params[:search]
+          tag_ids.append(p.id)
+        end
+      end
+
+      if !tag_ids.blank?
+        @posts = Post.where(:id => tag_ids)
+      else
+        @posts = Post.all
+      end
+    else
+      @posts = Post.all
+    end
+    # @posts = Post.tags_include(search_params[:search])
   end
 
   # GET /posts/1
@@ -69,6 +88,10 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:caption, :rating, :location, :time, :tags)
+      params.require(:post).permit(:caption, :rating, :location, :time, :tags, :image)
+    end
+
+    def search_params
+      params.permit(:caption, :rating, :location, :time, :tags, :image, :search)
     end
 end
