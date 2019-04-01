@@ -17,4 +17,11 @@ RSpec.describe Post, type: :model do
         Post.create!(rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS").to raise_exception ActiveRecord::NotNullViolation
     }
     end
+
+    it "should be able to comment on a post" do 
+        rp = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+        rp.comments.create!(username: "anon", body: "best bagel ever")
+        expect(rp.comments[0][:username].should eql "anon")
+        expect(rp.comments[0][:body].should eql "best bagel ever")
+    end
 end
