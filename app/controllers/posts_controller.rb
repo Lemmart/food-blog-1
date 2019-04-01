@@ -14,7 +14,7 @@ class PostsController < ApplicationController
           tag_ids.append(p.id)
         end
       end
-
+      
       if !tag_ids.blank?
         @posts = Post.where(:id => tag_ids)
       else
