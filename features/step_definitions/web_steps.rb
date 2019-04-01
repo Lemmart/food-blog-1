@@ -41,6 +41,12 @@ When /^(.*) within (.*[^:]):$/ do |step, parent, table_or_string|
   with_scope(parent) { When "#{step}:", table_or_string }
 end
 
+Given ("these Posts:") do |table|
+  table.hashes.each do |p|
+    Post.create!(p)
+  end
+end
+
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
@@ -78,9 +84,15 @@ end
 #
 When /^(?:|I )fill in the following:$/ do |fields|
   fields.rows_hash.each do |name, value|
-    When %{I fill in "#{name}" with "#{value}"}
+    page.fill_in name, :with => value
   end
 end
+
+# When /^(?:|I )fill in the following for Bagel:$/ do |fields|
+#   fields.rows_hash.each do |name, value|
+#     page.fill_in name, :with => value
+#   end
+# end
 
 When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
   select(value, :from => field)
