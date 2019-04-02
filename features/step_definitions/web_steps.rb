@@ -269,20 +269,22 @@ end
 #  Post Creation  #
 ###################
 
-Then /^I should see that (.*) has a rating of (.*)$/ do |post, rating|
-  byebug
-  j = all('.card-text', text: /#{post}/)
-  j[0].text.split(' ').last[1..].should =~/#{rating}/
+Then /^I should see that "(.*)" has a rating of (.*)$/ do |post, rating|
+  j = all('.card.mb-3', text: /#{post}/)
+  expect(j[0].text).to match(/Rating: #{rating.to_i}/)
 end
 
-Then /^I should see that (.*) has a location of (.*)$/ do |post, location|
-  pending # Write code here that turns the phrase above into concrete actions
+Then /^I should see that the location for "(.*)" is "(.*)"$/ do |post, location|
+  j = all('.card.mb-3', text: /#{post}/)
+  expect(j[0].text).to match(/Location: #{location}/)
 end
 
-Then /^I should see that (.*) has the tags (.*)$/ do |post, tags|
-  pending # Write code here that turns the phrase above into concrete actions
+Then /^I should see that "(.*)" has the tags "(.*)"$/ do |post, tags|
+  j = all('.card.mb-3', text: /#{post}/)
+  expect(j[0].text).to match(/Tags: #{tags}/)
 end
 
-Then /^I should see that (.*) has a time of (.*)$/ do |post, time|
-  pending # Write code here that turns the phrase above into concrete actions
+Then /^I should see that "(.*)" has a time of "(.*)"$/ do |post, time|
+  j = all('.card.mb-3', text: /#{post}/)
+  expect(j[0].text).to match(/Time: #{time}/)
 end
