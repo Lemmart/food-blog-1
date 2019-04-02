@@ -242,7 +242,7 @@ end
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
   if current_path.respond_to? :should
-    current_path.should == path_to(page_name)
+    expect(current_path).to eq(path_to(page_name))
   else
     assert_equal path_to(page_name), current_path
   end
@@ -263,4 +263,33 @@ end
 
 Then /^show me the page$/ do
   save_and_open_page
+end
+
+###################
+#  Post Creation  #
+###################
+
+# Then /^(?:|I )should be on (.+)$/ do |page_name|
+#   current_path = URI.parse(current_url).path
+#   if current_path.respond_to? :should
+#     expect(current_path).to eq(path_to(page_name))
+#   else
+#     assert_equal path_to(page_name), current_path
+#   end
+# end
+
+Then /"I should see that (.*) has a rating of (.*)/ do |post, rating|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then /"I should see that (.*) has a location of (.*)/ do |post, location|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then /"I should see that (.*) has the tags (.*)/ do |post, tags|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then /"I should see that (.*) has a time of (.*)/ do |post, time|
+  pending # Write code here that turns the phrase above into concrete actions
 end

@@ -12,7 +12,7 @@
       .card.mb-3
         .card-body
         %p.image= image_tag post.image.attached? ? post.image.variant(resize: "100x100^") : 'noimg.jpeg'
-        %p.card-text= "#{post.caption}"
+        %p.card-text= link_to("#{post.caption}", post_path(post), method: :get)
         %h6.card-subtitle.mb-2.text-muted= "#{post.location}"
         .card-body
           %a.card-link= link_to("Delete Post", post_path(post), method: :delete)
@@ -33,7 +33,7 @@
           = f.submit "Add comment"
     %br
       %br
-      
+    
     -# .post
     -# %h2 TITLE HEADING
     -# %h5 Title description, Dec 7, 2017
