@@ -23,7 +23,6 @@ class PostsController < ApplicationController
     else
       @posts = Post.all
     end
-    # @posts = Post.tags_include(search_params[:search])
   end
 
   # GET /posts/1
