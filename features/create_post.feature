@@ -20,7 +20,7 @@ Feature: Create a new post
         | Tags      | #soft #buttery  |
       When I press "Create Post"
       Then I should be on the post page
-      And I should see "New Post 'Pasta' created"
+      And I should see "Post was successfully created"
       And I should see that "pasta" has a rating of 3
       And I should see that the location for "pasta" is "Frank"
       And I should see that "pasta" has the tags "#soft #buttery"

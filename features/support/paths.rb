@@ -26,7 +26,6 @@ module NavigationHelpers
       "#{new_post_path}"
 
     when /^the post page$/
-      byebug
       "#{posts_path}"
 
     else
