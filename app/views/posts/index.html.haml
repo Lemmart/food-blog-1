@@ -1,23 +1,5 @@
 #main.container
 
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light.sticky-top
-    %button.navbar-toggler{"aria-controls" => "navbarColor03", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarColor03", "data-toggle" => "collapse", :type => "button"}
-      %span.navbar-toggler-icon
-    #navbarColor03.collapse.navbar-collapse
-      %ul.navbar-nav.mr-auto
-        %li.nav-item
-          %a.nav-link{:href => posts_path}
-            %img{:src => "FrankLyLogo.png", :alt => "Frank.ly"}
-        %li.nav-item
-          %a.nav-link{:href => "#"} Features
-        %li.nav-item
-          %a.nav-link{:href => "#"} Pricing
-        %li.nav-item
-          %a.nav-link{:href => "#"} About
-      %form.form-inline.my-2.my-lg-0
-        %input.form-control.mr-sm-2{:placeholder => "#search_tag", :type => "text", :name => "search"}/
-        %button.btn.btn-secondary.my-2.my-sm-0{:type => "submit"} Search
-
         
   -# =form_tag posts_path, :method => :get do
   -#   = label_tag :search_term, "Search"
@@ -30,8 +12,11 @@
       .card.mb-3
         .card-body
         %p.image= image_tag post.image.attached? ? post.image.variant(resize: "100x100^") : 'noimg.jpeg'
-        %p.card-text= "#{post.caption}"
-        %h6.card-subtitle.mb-2.text-muted= "#{post.location}"
+        %p.card-text= link_to("#{post.caption}", post_path(post), method: :get)
+        %h6.card-subtitle.mb-2.text-muted= "Rating: #{post.rating}"
+        %h6.card-subtitle.mb-2.text-muted= "Location: #{post.location}"
+        %h6.card-subtitle.mb-2.text-muted= "Time: #{post.time}"
+        %h6.card-subtitle.mb-2.text-muted= "Tags: #{post.tags}"
         .card-body
           %a.card-link= link_to("Delete Post", post_path(post), method: :delete)
         .card-footer.text-muted
@@ -51,7 +36,7 @@
           = f.submit "Add comment"
     %br
       %br
-      
+    
     -# .post
     -# %h2 TITLE HEADING
     -# %h5 Title description, Dec 7, 2017
