@@ -5,6 +5,7 @@
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
 $background-color: #343a40;
+@import "font-awesome";
 
 .body {
     background-color: #343a40;
@@ -30,4 +31,22 @@ $background-color: #343a40;
 
 .comment {
     color: lightblue
+}
+
+.float{
+    font-family: 'Open Sans', sans-serif;
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#0C9;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+	margin-top:22px;
 }
