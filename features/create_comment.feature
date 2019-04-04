@@ -14,7 +14,7 @@ Feature: Create a new comment
         When I fill in the following:
             | Username |  Foodie     |
             | Body     | Tastes good |
-        When I press "Add comment"
+        When I press "Create Comment"
         Then I should be on the posts page
         And I should see "Foodie"
         And I should see "Tastes good"

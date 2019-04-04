@@ -3,8 +3,8 @@ class CommentsController < ApplicationController
         #@comment = Comment.new
     end
     def index
-        @post = Post.find(params[:post_id])
-        @comment = @post.all
+        # @post = Post.find(params[:post_id])
+        # @comment = @post.all
     end
     def show
     end
