@@ -13,6 +13,10 @@ class PostsController < ApplicationController
           tag_ids.append(p.id)
         end
       end
+      if tag_ids.empty?
+        flash[:warning] = 'No results found.'
+      end
+
       
       if !tag_ids.blank?
         @posts = Post.where(:id => tag_ids).order('created_at DESC')
