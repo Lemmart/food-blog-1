@@ -1,6 +1,6 @@
 #main.container
   %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.8.1/css/all.css", :integrity => "sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf", :rel => "stylesheet"}/
-
+  %link{:href => "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstra", :rel => "stylesheet"}/
   -# =form_tag posts_path, :method => :get do
   -#   = label_tag :search_term, "Search"
   -#   = text_field_tag :search_term
@@ -23,15 +23,10 @@
         -post.comments.each do |c|
           %p #{c.username}: #{c.body}
         %p.comment Add a comment:
-        =form_for([post, post.comments.build]) do |f|
-          .field
-          = f.label :username
-          = f.text_field :username
-          .field
-          = f.label :body
-          = f.text_area :body
-          .actions
-          = f.submit "Add comment"
+        =simple_form_for([post, post.comments.build]) do |f|
+          = f.input :username
+          = f.input :body
+          = f.button :submit
     %br
       %br
     // Floating Button

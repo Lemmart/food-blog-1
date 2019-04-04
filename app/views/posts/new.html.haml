@@ -1,3 +1,4 @@
 %h3 New Post
 = render 'form', post: @post
-= link_to 'Back', posts_path
+%br
+%button.btn.btn-outline-success{:type => "button"}= link_to('Back', posts_path)
