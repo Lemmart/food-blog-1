@@ -26,4 +26,33 @@ Feature: Create a new post
       And I should see that "Pasta" has the tags "#soft #buttery"
       And I should see that "Pasta" has a time of "8:00pm"
       And I should see that "Pasta" has an image "noimg"
+    
+
+    ############### NEED HELP ###############
+    Scenario: Update a post
+      Given I am on the posts page
+      Then I should see "Bagel"
+      When I click on "Bagel"
+      # Then I should see "Rating: 5"
+      # And I should see "Caption: Bagel"
+      # And I should see "Location: Frank"
+      # And I should see "Time: 10:00pm"
+      # And I should see "Tags: #GoodEATS"
+      # When I press on "Edit"
+      # And I fill in "Caption" with "McBagel"
+      # And I fill in "Rating" with "4"
+      # Then I press "Create Post"
+      # I should see "Rating: 4"
+      # I should see "Caption: McBagel"
+      # I should see "Location: Frank"
+      # I should see "Time: 10:00pm"
+      # I should see "Tags: #GoodEATS"
+
+    ############### NEED HELP ###############
+    Scenario: Delete a post
+      Given I am on the posts page
+      When I click on "Delete Post"
+      # I should see "Post was successfully destroyed."
+      # And I should be on the posts page
+      # And I should not see "Bagel"
       

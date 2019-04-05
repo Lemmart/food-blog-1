@@ -62,9 +62,7 @@ RSpec.describe "show page", type: :feature do
 
   it "should be able to update a Post object" do
     rp = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
-    Post.update(rp.id,caption: "Ice Cream", rating: "1", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
-    rp = Post.find_by_id(rp.id)
-    expect(rp.caption).to eql("Ice Cream")
-    expect(rp.rating).to eql(1)
+    rp.update(:caption => "cookie")
+    expect(rp.caption).to eq("cookie")
   end
 end
