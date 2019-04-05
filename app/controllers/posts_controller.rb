@@ -41,6 +41,8 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    id = params[:id]
+    @property = RentalProperty.find(id)
   end
 
   # POST /posts
