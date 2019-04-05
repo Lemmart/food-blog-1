@@ -25,3 +25,46 @@ RSpec.describe PostsController do
   it { is_expected.to respond_to(:show) }
   it { is_expected.to respond_to(:create) }
 end
+
+RSpec.describe "show page", type: :feature do
+  before :each do
+    Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+    Post.create!(caption: "Ice Cream", rating: "2", location: "Frank", time: "12:00pm", tags:"#ice")
+    visit "/posts"
+  end
+  
+  it "should correctly allow a Post to be be deleted" do
+    expect(page).to have_link("Delete Post")
+    names = [] 
+    first(:link, "Delete Post").click
+    visit "/posts"
+    page.all(".titley").each { |x| names << x.text }
+    expect(names.length).to eq(1)
+  end
+
+  it "should correctly allow for multiple Posts to be deleted"  do
+    expect(page).to have_link("Delete Post")
+    names = [] 
+    first(:link, "Delete Post").click
+    visit "/posts"
+    first(:link, "Delete Post").click
+    visit "/posts"
+    page.all(".titley").each { |x| names << x.text }
+    expect(names.length).to eq(0)
+  end
+
+  it "should be able to destroy a created Post object" do
+    rp = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+    Post.destroy(rp.id)
+    rp2 = Post.find_by_id(rp.id)
+    expect(rp2).to be_nil
+  end
+
+  it "should be able to update a Post object" do
+    rp = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+    Post.update(rp.id,caption: "Ice Cream", rating: "1", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+    rp = Post.find_by_id(rp.id)
+    expect(rp.caption).to eql("Ice Cream")
+    expect(rp.rating).to eql(1)
+  end
+end

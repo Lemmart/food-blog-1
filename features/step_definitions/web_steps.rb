@@ -303,9 +303,6 @@ When /^I should see that no results were found$/ do
   page.should have_css('.alert', text: "No results found.")
 end
 
-
-
-
 ###################
 #        Nav      #
 ###################
@@ -317,6 +314,8 @@ Then(/^I should see posts in age ascending order$/) do
   end
   expect(titles).to eq(['Sushi', 'Chicken', 'Muffin', 'Bacon', 'Bagel'])
 end
+
+
 
 
 
