@@ -17,3 +17,11 @@ RSpec.describe Post, type: :model do
 
   end
 end
+
+RSpec.describe PostsController do
+  it { is_expected.to respond_to(:new) }
+  it { is_expected.to respond_to(:index) }
+  it { is_expected.to respond_to(:edit) }
+  it { is_expected.to respond_to(:show) }
+  it { is_expected.to respond_to(:create) }
+end
