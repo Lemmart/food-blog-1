@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     id = params[:id]
-    @post = Post.find(id)
+    @post = Post.find(id) 
   end
 
   # POST /posts
