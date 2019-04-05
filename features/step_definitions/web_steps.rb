@@ -88,12 +88,6 @@ When /^(?:|I )fill in the following:$/ do |fields|
   end
 end
 
-# When /^(?:|I )fill in the following for Bagel:$/ do |fields|
-#   fields.rows_hash.each do |name, value|
-#     page.fill_in name, :with => value
-#   end
-# end
-
 When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
   select(value, :from => field)
 end
@@ -288,3 +282,41 @@ Then /^I should see that "(.*)" has a time of "(.*)"$/ do |post, time|
   j = all('.card.mb-3', text: /#{post}/)
   expect(j[0].text).to match(/Time: #{time}/)
 end
+
+Then(/I should see that "(.*)" has an image "(.*)"$/) do |post, img_name|
+  expect(page).to have_css("img[src*=#{img_name}]")
+end
+
+###################
+#  Searching      #
+###################
+
+When /^(?:|I )fill in the following search term: "(.*)"$/ do |search_term|
+  fill_in 'search', :with => search_term
+  click_on 'Search'
+  # byebug
+end
+
+When /^I should see that no results were found$/ do 
+  fill_in 'search', :with => "#yummy"
+  click_on 'Search'
+  page.should have_css('.alert', text: "No results found.")
+end
+
+
+
+
+###################
+#        Nav      #
+###################
+
+Then(/^I should see posts in age ascending order$/) do
+  titles = []
+  all(".titley").each do |title|
+    titles << title.text
+  end
+  expect(titles).to eq(['Sushi', 'Chicken', 'Muffin', 'Bacon', 'Bagel'])
+end
+
+
+

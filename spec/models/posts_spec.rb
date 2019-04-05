@@ -11,9 +11,9 @@ RSpec.describe Post, type: :model do
       expect(rp).to respond_to :tags
     end
     
-    it "should fail to create a Post object if any values are missing" do
-    expect {
-      Post.create!(rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS").to raise_exception ActiveRecord::NotNullViolation
-    }
-    end
+    # it "should fail to create a Post object if any values are missing" do
+    #   expect(Post.create!(rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")).to raise_exception(ActiveRecord::NotNullViolation)
+    # end
+
+  end
 end

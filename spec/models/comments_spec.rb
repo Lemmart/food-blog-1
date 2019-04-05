@@ -19,4 +19,5 @@ RSpec.describe Comment, type: :model do
       expect(rp.comments[1][:username]).to eql("anon2")
       expect(rp.comments[1][:body]).to eql("worst bagel ever")
     end
+  end
 end

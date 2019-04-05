@@ -28,6 +28,9 @@ module NavigationHelpers
     when /^the post page$/
       "#{posts_path}"
 
+    when /^the index page$/
+      "#{posts_path}"
+
     else
       begin
         page_name =~ /^the (.*) page$/

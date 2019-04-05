@@ -25,3 +25,5 @@ Feature: Create a new post
       And I should see that the location for "Pasta" is "Frank"
       And I should see that "Pasta" has the tags "#soft #buttery"
       And I should see that "Pasta" has a time of "8:00pm"
+      And I should see that "Pasta" has an image "noimg"
+      
