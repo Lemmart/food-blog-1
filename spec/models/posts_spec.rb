@@ -60,9 +60,23 @@ RSpec.describe "show page", type: :feature do
     expect(rp2).to be_nil
   end
 
-  it "should be able to update a Post object" do
+  # it "should be able to update a Post object" do
+  #   rp = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+  #   rp.update(:caption => "cookie")
+    
+  #   # expect(page).to have_link("Bagel")
+  #   # click_link("Bagel")
+  #   # expect(page).to have_link("Edit")
+  #   # click_link("Edit")
+  #   # fill_in "Caption", :with => "cookie"
+  #   # click_button("Create Post")
+
+  #   expect(rp.caption).to eq("cookie")
+  # end
+
+  it "should be able to delete a Post object" do
     rp = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
-    rp.update(:caption => "cookie")
-    expect(rp.caption).to eq("cookie")
+    rp.destroy
+    expect(Post.find_by_id(rp.id)).to eq(nil)
   end
 end
