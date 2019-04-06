@@ -110,7 +110,7 @@ end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
   if page.respond_to? :should
-    page.should have_content(text)
+    expect(page).to have_content(text)
   else
     assert page.has_content?(text)
   end
@@ -288,13 +288,20 @@ Then(/I should see that "(.*)" has an image "(.*)"$/) do |post, img_name|
 end
 
 ###################
+#  Post Updates   #
+###################
+
+# When /^(?:|I )click on "(.*)"$/ do |page|
+
+# end
+
+###################
 #  Searching      #
 ###################
 
 When /^(?:|I )fill in the following search term: "(.*)"$/ do |search_term|
   fill_in 'search', :with => search_term
   click_on 'Search'
-  # byebug
 end
 
 When /^I should see that no results were found$/ do 
