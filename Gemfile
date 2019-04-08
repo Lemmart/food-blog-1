@@ -16,8 +16,6 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
-gem 'pg', '~> 0.18'
-
 gem "haml"
 
 # Use CoffeeScript for .coffee assets and views
@@ -49,7 +47,7 @@ gem 'simple_form'
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   # gem 'sqlite3','~> 1.3.6'
-  # gem 'sqlite3'
+  gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
@@ -78,8 +76,7 @@ group :test do
 end
 
 group :production do
-  # gem "pg", "~> 0.21"
-  # gem "pg"
+  gem "pg", '~> 0.18'
   gem 'rails_12factor'
 end
 
