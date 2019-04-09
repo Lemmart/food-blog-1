@@ -9,7 +9,7 @@
     -@posts.each do |post|
       .card.mb-3.posty
         .card-body
-        %p.image= image_tag post.image.attached? ? post.image.variant(resize: "100x100^") : 'images/noimg.jpeg'
+        -# %p.image= image_tag post.image.attached? ? post.image.variant(resize: "100x100^") : 'images/noimg.jpeg'
         %p.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
         %h6.card-subtitle.mb-2.text-muted.stars= "Rating: #{post.rating}"
         - (1..post.rating).each do |s|
