@@ -1,6 +1,10 @@
 # food-blog-1
 COSC 480 - Frank Food Blog team 1
 
+### Team Meeting on 4/10
+- Lauren & Liam: Devise Authentication, Image rendering 
+- Adam & Eman: About Page (UI on whiteboard, can maybe do click on a username to see other people’s page?), comments integration username, post integration username, delete your own posts only !!!!!
+
 ### Sommers Meeting on 4/9
 
 Pushing to Heroku (Meeting with Sommers 4/9/2019)
