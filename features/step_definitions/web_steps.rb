@@ -23,7 +23,7 @@ require 'uri'
 require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
-
+include Warden::Test::Helpers
 module WithinHelpers
   def with_scope(locator)
     locator ? within(*selector_for(locator)) { yield } : yield
@@ -48,7 +48,11 @@ Given ("these Posts:") do |table|
 end
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
+  user = FactoryBot.create(:user)
+  login_as(user, :scope => :user, :run_callbacks => false)
+  user.save!(validate: false)
   visit path_to(page_name)
+  Warden.test_reset! 
 end
 
 When /^(?:|I )go to (.+)$/ do |page_name|

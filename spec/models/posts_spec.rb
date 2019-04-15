@@ -34,15 +34,24 @@ RSpec.describe "show page", type: :feature do
   end
   
   it "should correctly allow a Post to be be deleted" do
+    user = FactoryBot.create(:user)
+    login_as(user, :scope => :user, :run_callbacks => false)
+    user.save!(validate: false)
+    click_button "Log in"
     expect(page).to have_link("Delete Post")
     names = [] 
     first(:link, "Delete Post").click
     visit "/posts"
     page.all(".titley").each { |x| names << x.text }
     expect(names.length).to eq(1)
+    Warden.test_reset!
   end
 
   it "should correctly allow for multiple Posts to be deleted"  do
+    user = FactoryBot.create(:user)
+    login_as(user, :scope => :user, :run_callbacks => false)
+    user.save!(validate: false)
+    click_button "Log in"
     expect(page).to have_link("Delete Post")
     names = [] 
     first(:link, "Delete Post").click
@@ -51,6 +60,7 @@ RSpec.describe "show page", type: :feature do
     visit "/posts"
     page.all(".titley").each { |x| names << x.text }
     expect(names.length).to eq(0)
+    Warden.test_reset! 
   end
 
   it "should be able to destroy a created Post object" do
