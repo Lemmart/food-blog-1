@@ -2,6 +2,7 @@ Feature: Create a new comment
     As a user
     so that I can comment on a post
     I want to be able to add a new comment
+    
 
     Background: the website already has some existing posts
         Given these Posts:
