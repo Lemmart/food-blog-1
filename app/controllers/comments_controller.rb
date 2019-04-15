@@ -11,9 +11,13 @@ class CommentsController < ApplicationController
     def edit
     end
     def create
+        @user = current_user
         @post = Post.find(params[:post_id])
-        if !params[:comment][:username].strip.empty? && !params[:comment][:body].strip.empty?
-            @comment = @post.comments.create(comments_params)
+        if !params[:comment].empty? && !params[:comment][:body].strip.empty?
+            values = {}
+            values[:body] = comments_params[:body]
+            values[:username] = current_user.id
+            @comment = @post.comments.create(values)
             @comment.time = Time.now
         end
         redirect_to posts_path
@@ -23,6 +27,6 @@ class CommentsController < ApplicationController
     private
     # Never trust parameters from the scary internet, only allow the white list through.
     def comments_params
-        params.require(:comment).permit( :username, :body)
+        params.require(:comment).permit(:body)
     end
 end

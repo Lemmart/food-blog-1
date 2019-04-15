@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @user = current_user
     s_params = search_params
     if !s_params[:search].nil?
       tag_ids = []
@@ -32,6 +33,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @user = current_user
   end
 
   # GET /posts/new
@@ -48,7 +50,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @user = current_user
+    @post = Post.new(post_params.merge [:username => curent_user.id])
     respond_to do |format|
       if @post.save
         format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
@@ -63,10 +66,14 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    @user = current_user
     respond_to do |format|
       # find @post by :id passed in to params!!!
       # @post = Post.find()
-      if @post.update(post_params)
+
+      values = post_params.clone
+      values[:username] = current_user.id
+      if @post.update(values)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
