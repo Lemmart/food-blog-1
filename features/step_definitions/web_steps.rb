@@ -326,7 +326,26 @@ Then(/^I should see posts in age ascending order$/) do
   expect(titles).to eq(['Sushi', 'Chicken', 'Muffin', 'Bacon', 'Bagel'])
 end
 
+###################
+#    Sign In      #
+###################
 
+Given /^I am not authenticated$/ do
+  visit('/users/sign_out') # ensure that at least
+end
 
+Given /^I am a new, authenticated user with username: "(.*)"$/ do |username|
+  email = 'testing@gmail.com'
+  password = 'itsasecret'
 
+  visit '/users/sign_up'
+  
+  fill_in "user_email", :with => email
+  fill_in "Username", :with => username
+  fill_in "user_password", :with => password
+  fill_in "Password confirmation", :with => password
 
+  click_button "Sign up"
+  
+  visit '/posts'
+end

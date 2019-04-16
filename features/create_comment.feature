@@ -11,11 +11,9 @@ Feature: Create a new comment
             # | Bacon    | 4       |  Coop     | 10:00am  |   #BACON     |
     
     Scenario: Add a comment to a post
-        Given I am on the posts page
+        Given I am a new, authenticated user with username: "Foodie"
         When I fill in the following:
-            | Username |  Foodie     |
             | Body     | Tastes good |
         When I press "Create Comment"
-        Then I should be on the posts page
         And I should see "Foodie"
         And I should see "Tastes good"

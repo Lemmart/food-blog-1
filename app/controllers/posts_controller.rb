@@ -51,7 +51,9 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @user = current_user
-    @post = Post.new(post_params.merge [:username => curent_user.id])
+    values = post_params.clone
+    values[:username] = current_user.username
+    @post = Post.new(values)
     respond_to do |format|
       if @post.save
         format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
@@ -72,7 +74,7 @@ class PostsController < ApplicationController
       # @post = Post.find()
 
       values = post_params.clone
-      values[:username] = current_user.id
+      values[:username] = current_user.username
       if @post.update(values)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
