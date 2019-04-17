@@ -49,9 +49,9 @@ ActiveRecord::Schema.define(version: 2019_04_15_024736) do
     t.string "location"
     t.string "time"
     t.text "tags"
+    t.string "username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "username"
   end
 
   create_table "users", force: :cascade do |t|
