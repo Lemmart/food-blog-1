@@ -1,0 +1,21 @@
+// Place all the styles related to the Static controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.clear{
+clear:both;
+} 
+.main{
+    width:1000px;
+}
+.left {
+    float:left;
+    width: 150px;
+    background: red;
+}
+.right{
+    float:right;
+    width:850px;
+    height:1000px;
+    background: lightblue;
+}

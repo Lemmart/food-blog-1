@@ -14,6 +14,7 @@
         %h6.card-subtitle.mb-2.text-muted.stars= "Rating: #{post.rating}"
         - (1..post.rating).each do |s|
           .stars.fas.fa-star
+        
         %h6.card-subtitle.mb-2.text-muted= "Location: #{post.location}"
         %h6.card-subtitle.mb-2.text-muted= "User: #{post.username}"
         %h6.card-subtitle.mb-2.text-muted= "Time: #{post.time}"

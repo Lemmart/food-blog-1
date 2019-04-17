@@ -30,6 +30,9 @@ module NavigationHelpers
 
     when /^the index page$/
       "#{posts_path}"
+    
+    when /^About$/
+      "/about"
 
     else
       begin
