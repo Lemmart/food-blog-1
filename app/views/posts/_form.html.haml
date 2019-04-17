@@ -2,19 +2,19 @@
   = form_with(model: post, local: true) do |form|
     .field
       = form.label :caption
-      = form.text_field :caption
+      = form.text_field :caption, required: true
     .field
       = form.label :rating
-      = form.number_field :rating
+      = form.number_field :rating, required: true
     .field
       = form.label :location
-      = form.text_field :location
+      = form.text_field :location, required: true
     .field
       = form.label :time
-      = form.text_field :time
+      = form.text_field :time, required: true
     .field
       = form.label :tags
-      = form.text_area :tags
+      = form.text_area :tags, required: true
     .field
       =form.label :image, "Image"
       =form.file_field :image, accept: "image/png,image/gif,image/jpeg"
