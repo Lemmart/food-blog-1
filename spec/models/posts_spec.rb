@@ -46,9 +46,9 @@ RSpec.describe "show page", type: :feature do
     login_as(user, :scope => :user, :run_callbacks => false)
     user.save!(validate: false)
     click_button "Log in"
-    expect(page).to have_link("Delete Post")
+    expect(page).to have_link("Delete")
     names = [] 
-    first(:link, "Delete Post").click
+    first(:link, "Delete").click
     visit "/posts"
     page.all(".titley").each { |x| names << x.text }
     expect(names.length).to eq(1)
@@ -60,11 +60,11 @@ RSpec.describe "show page", type: :feature do
     login_as(user, :scope => :user, :run_callbacks => false)
     user.save!(validate: false)
     click_button "Log in"
-    expect(page).to have_link("Delete Post")
+    expect(page).to have_link("Delete")
     names = [] 
-    first(:link, "Delete Post").click
+    first(:link, "Delete").click
     visit "/posts"
-    first(:link, "Delete Post").click
+    first(:link, "Delete").click
     visit "/posts"
     page.all(".titley").each { |x| names << x.text }
     expect(names.length).to eq(0)

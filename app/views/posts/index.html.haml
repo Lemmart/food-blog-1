@@ -26,7 +26,7 @@
 
         %h6.card-subtitle.mb-2.text-muted= "User: #{post.user.username}"
         
-        .card-footer.text-muted.time= "#{post.location} || #{post.time} || #{post.tags}"
+        .card-footer.text-muted.post-information= "#{post.location} || #{post.time} || #{post.tags} || Stars: #{post.rating}"
 
         -post.comments.each do |c|
           %p #{c.user.username}: #{c.body}

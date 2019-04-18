@@ -275,22 +275,22 @@ end
 
 Then /^I should see that "(.*)" has a rating of (.*)$/ do |post, rating|
   j = all('.card.mb-3', text: /#{post}/)
-  expect(j[0].text).to match(/Rating: #{rating.to_i}/)
+  expect(j[0].text).to match(/Stars: #{rating}/)
 end
 
 Then /^I should see that the location for "(.*)" is "(.*)"$/ do |post, location|
   j = all('.card.mb-3', text: /#{post}/)
-  expect(j[0].text).to match(/Location: #{location}/)
+  expect(j[0].text).to match(/#{location}/)
 end
 
 Then /^I should see that "(.*)" has the tags "(.*)"$/ do |post, tags|
   j = all('.card.mb-3', text: /#{post}/)
-  expect(j[0].text).to match(/Tags: #{tags}/)
+  expect(j[0].text).to match(/#{tags}/)
 end
 
 Then /^I should see that "(.*)" has a time of "(.*)"$/ do |post, time|
   j = all('.card.mb-3', text: /#{post}/)
-  expect(j[0].text).to match(/Time: #{time}/)
+  expect(j[0].text).to match(/#{time}/)
 end
 
 Then(/I should see that "(.*)" has an image "(.*)"$/) do |post, img_name|
