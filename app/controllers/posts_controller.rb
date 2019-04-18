@@ -51,14 +51,14 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @user = current_user
-    values = post_params.clone
-    values[:user_id] = current_user.id
-    @post = Post.new(values)
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
     respond_to do |format|
       if @post.save
         format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
+        puts ("FAILED")
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -69,13 +69,10 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     @user = current_user
-    respond_to do |format|
-      # find @post by :id passed in to params!!!
-      # @post = Post.find()
+    @post.user_id = current_user.id
 
-      values = post_params.clone
-      values[:user_id] = current_user.id
-      if @post.update(values)
+    respond_to do |format|
+      if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -101,7 +98,6 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:caption, :rating, :location, :time, :tags, :image)
     end
