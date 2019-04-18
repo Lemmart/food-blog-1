@@ -16,8 +16,9 @@ class CommentsController < ApplicationController
         if !params[:comment].empty? && !params[:comment][:body].strip.empty?
             values = {}
             values[:body] = comments_params[:body]
-            values[:username] = current_user.username
+            values[:user_id] = current_user.id
             @comment = @post.comments.create(values)
+            @comment.username = @user.username
             @comment.time = Time.now
         end
         redirect_to posts_path

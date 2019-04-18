@@ -16,7 +16,7 @@
           .stars.fas.fa-star
         
         %h6.card-subtitle.mb-2.text-muted= "Location: #{post.location}"
-        %h6.card-subtitle.mb-2.text-muted= "User: #{post.username}"
+        %h6.card-subtitle.mb-2.text-muted= "User: #{post.user.username}"
         %h6.card-subtitle.mb-2.text-muted= "Time: #{post.time}"
         %h6.card-subtitle.mb-2.text-muted= "Tags: #{post.tags}"
         .card-body
@@ -25,7 +25,7 @@
           %p.time= "#{post.time}"
         %p.comment Comments
         -post.comments.each do |c|
-          %p #{c.username}: #{c.body}
+          %p #{@user.username}: #{c.body}
         %p.comment Add a comment:
         =simple_form_for([post, post.comments.build]) do |f|
           = f.input :body

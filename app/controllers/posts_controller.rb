@@ -52,7 +52,7 @@ class PostsController < ApplicationController
   def create
     @user = current_user
     values = post_params.clone
-    values[:username] = current_user.username
+    values[:user_id] = current_user.id
     @post = Post.new(values)
     respond_to do |format|
       if @post.save
@@ -74,7 +74,7 @@ class PostsController < ApplicationController
       # @post = Post.find()
 
       values = post_params.clone
-      values[:username] = current_user.username
+      values[:user_id] = current_user.id
       if @post.update(values)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }

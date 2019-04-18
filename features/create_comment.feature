@@ -5,9 +5,12 @@ Feature: Create a new comment
     
 
     Background: the website already has some existing posts
+        Given these Users:
+            |     email      |   password  |  username  | id |
+            | t@example.com  |   testtest  |  "Foodie"  | 1  |
         Given these Posts:
-            | caption  | rating  | location  |  time    |   tags       |
-            | Bagel    | 5       |  Frank    | 10:00pm  |   #GoodEATS  |
+            | caption  | rating  | location  |  time    |   tags       | user_id |
+            | Bagel    | 5       |  Frank    | 10:00pm  |   #GoodEATS  |    1    |
             # | Bacon    | 4       |  Coop     | 10:00am  |   #BACON     |
     
     Scenario: Add a comment to a post

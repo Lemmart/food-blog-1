@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe Post, type: :model do
   describe "check attributes and methods" do
     it "should be able to create a Post object which has the correct methods on it" do
-      rp = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+      user1 = User.create!(email: "arewein@example.com", password: "arewein", username: "arewein")
+      user1.save!(validate: true)
+
+      rp = Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
       expect(rp).to respond_to :caption
       expect(rp).to respond_to :rating
       expect(rp).to respond_to :location
@@ -28,8 +31,13 @@ end
 
 RSpec.describe "show page", type: :feature do
   before :each do
-    Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
-    Post.create!(caption: "Ice Cream", rating: "2", location: "Frank", time: "12:00pm", tags:"#ice")
+    user1 = User.create!(email: "arewein@example.com", password: "arewein", username: "arewein")
+    user1.save!(validate: true)
+    user2 = User.create!(email: "arewein@test.com", password: "areare", username: "are")
+    user2.save!(validate: true)
+
+    Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+    Post.create!(user_id: "#{user2.id}", caption: "Ice Cream", rating: "2", location: "Frank", time: "12:00pm", tags:"#ice")
     visit "/posts"
   end
   
@@ -64,7 +72,10 @@ RSpec.describe "show page", type: :feature do
   end
 
   it "should be able to destroy a created Post object" do
-    rp = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+    user4 = User.create!(email: "le@example.com", password: "example", username: "four")
+    user4.save!(validate: true)
+    
+    rp = Post.create!(user_id: "#{user4.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
     Post.destroy(rp.id)
     rp2 = Post.find_by_id(rp.id)
     expect(rp2).to be_nil
@@ -85,7 +96,10 @@ RSpec.describe "show page", type: :feature do
   # end
 
   it "should be able to delete a Post object" do
-    rp = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+    user5 = User.create!(email: "plen@test.com", password: "examplen", username: "five")
+    user5.save!(validate: true)
+    
+    rp = Post.create!(user_id: "#{user5.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
     rp.destroy
     expect(Post.find_by_id(rp.id)).to eq(nil)
   end

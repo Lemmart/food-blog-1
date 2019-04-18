@@ -4,16 +4,30 @@ RSpec.describe Comment, type: :model do
   describe "check attributes and methods" do
 
     it "should be able to comment on a post" do 
-      rp = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
-      rp.comments.create!(username: "anon", body: "best bagel ever")
+      user1 = User.create!(email: "arewein@example.com", password: "arewein", username: "arewein")
+      user1.save!(validate: true)
+
+      comment1 = User.create!(email: "arein@example.com", password: "arewein", username: "anon")
+      comment1.save!(validate: true)
+
+      rp = Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+      rp.comments.create!(user_id: "#{user1.id}", username: "#{comment1.username}", body: "best bagel ever")
       expect(rp.comments[0][:username]).to eql("anon")
       expect(rp.comments[0][:body]).to eql("best bagel ever")
     end
 
     it "should be able to have mulitple comments on a post" do
-      rp = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
-      rp.comments.create!(username: "anon", body: "best bagel ever")
-      rp.comments.create!(username: "anon2", body: "worst bagel ever")
+      user2 = User.create!(email: "arewein@test.com", password: "areare", username: "are")
+      user2.save!(validate: true)
+
+      comment1 = User.create!(email: "arein@example.com", password: "arewein", username: "anon")
+      comment1.save!(validate: true)
+      comment2 = User.create!(email: "wein@test.com", password: "areare", username: "anon2")
+      comment2.save!(validate: true)
+
+      rp = Post.create!(user_id: "#{user2.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+      rp.comments.create!(user_id: "#{user2.id}", username: "#{comment1.username}", body: "best bagel ever")
+      rp.comments.create!(user_id: "#{user2.id}", username: "#{comment2.username}", body: "worst bagel ever")
       expect(rp.comments[0][:username]).to eql("anon")
       expect(rp.comments[0][:body]).to eql("best bagel ever")
       expect(rp.comments[1][:username]).to eql("anon2")

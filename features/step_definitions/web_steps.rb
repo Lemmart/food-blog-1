@@ -47,6 +47,12 @@ Given ("these Posts:") do |table|
   end
 end
 
+Given ("these Users:") do |table|
+  table.hashes.each do |p|
+    User.create!(p)
+  end
+end
+
 Given /^(?:|I )am on (.+)$/ do |page_name|
   user = FactoryBot.create(:user)
   login_as(user, :scope => :user, :run_callbacks => false)
