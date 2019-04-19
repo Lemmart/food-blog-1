@@ -53,7 +53,7 @@ class PostsController < ApplicationController
     # byebug
 
     @user = current_user
-    byebug
+    # byebug
     @post = Post.new(post_params)
     @post.user = current_user
     puts (current_user)
