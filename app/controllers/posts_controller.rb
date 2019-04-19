@@ -53,10 +53,11 @@ class PostsController < ApplicationController
     # byebug
 
     @user = current_user
+    # byebug
     @post = Post.new(post_params)
     # @post.user = current_user
     puts (current_user)
-    logger.debug(current_user)
+    logger.warn(current_user)
     @post.user_id = current_user.id
     respond_to do |format|
       if @post.save
