@@ -48,7 +48,11 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @user = current_user
+    values = {}
+    values = post_params.clone
+    values[:user_id] = current_user.id
+    @post = Post.new(values)
     respond_to do |format|
       if @post.save
         format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
@@ -66,7 +70,10 @@ class PostsController < ApplicationController
     respond_to do |format|
       # find @post by :id passed in to params!!!
       # @post = Post.find()
-      if @post.update(post_params)
+      values = {}
+      values = post_params.clone
+      values[:user_id] = current_user.id
+      if @post.update(values)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
