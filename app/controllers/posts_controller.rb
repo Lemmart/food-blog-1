@@ -51,7 +51,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     # byebug
-    # @user = current_user
+    @user = current_user
     @post = Post.new(post_params)
     @post.user = current_user
     # @post.user_id = current_user.id
@@ -69,7 +69,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    # @user = current_user
+    @user = current_user
     @post.user = current_user
 
     respond_to do |format|
