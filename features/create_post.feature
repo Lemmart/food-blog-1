@@ -16,6 +16,7 @@ Feature: Create a new post
       | Muffin    | 3       |  Frank    | 8:30am   |   #muffins   |    3    |
 
     Scenario: Create a new post without specific image
+      Given I am a new, authenticated user with username: "PastaFiend"
       Given I am on the create new post page
       When I fill in the following:
         | Caption   | Pasta           |
@@ -33,6 +34,7 @@ Feature: Create a new post
       And I should see that "Pasta" has an image "noimg"
     
     Scenario: Update a post
+      Given I am a new, authenticated user with username: "Serial Updater"
       Given I am on the posts page
       Then I should see "Bagel"
       When I follow "Bagel"
@@ -50,16 +52,4 @@ Feature: Create a new post
       And I should see "Location: Frank"
       And I should see "Time: 10:00pm"
       And I should see "Tags: #GoodEATS"
-
-    # ############### NEED HELP ###############
-    # Issue with current test: multiple delete buttons on index page (expected behavior), 
-    # so unable to simply click button
-    # 
-    # Scenario: Delete a post
-    #   Given I am on the posts page
-    #   When I follow "Bagel"
-    #   When I follow "Delete Post" for "Bagel"
-    #   Then I should see "Post was successfully destroyed."
-    #   And I should be on the posts page
-    #   And I should not see "Bagel"
       
