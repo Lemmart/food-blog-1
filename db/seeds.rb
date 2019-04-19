@@ -65,6 +65,15 @@ when "production"
     user1 = User.create!(email: "bill@example.com", password: "arewein", username: "bill")
     user1.save!(validate: true)
 
+    user2 = User.create!(email: "bob@example.com", password: "areare", username: "bob")
+    user2.save!(validate: true)
+
+    comment1 = User.create!(email: "sarah@example.com", password: "arewein", username: "sarah")
+    comment1.save!(validate: true)
+
+    comment2 = User.create!(email: "molly@test.com", password: "areare", username: "molly")
+    comment2.save!(validate: true)
+
     a = Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
     a.comments.create!(user_id: "#{comment1.id}", username: "#{comment1.username}", body: "best bagel ever")
     a.comments.create!(user_id: "#{comment2.id}", username: "#{comment2.username}", body: "why is there a hole in the middle? isnt that a donut?")
