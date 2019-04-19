@@ -1,10 +1,10 @@
 
--# %h3="About"#" #{@user.username}"
--# .main
--#     .left   
--#         %p="Posts:"#" #{@user.posts.length}"
--#         %br
--#     .right
+%h3="About"#" #{@user.username}"
+.main
+    .left   
+        %p="Posts:"#" #{@user.posts.length}"
+        %br
+    .right
 -#         -@posts.each do |post|
 -#             -# %p.image= image_tag post.image.attached? ? post.image.variant(resize: "100x100^") : 'images/noimg.jpeg'
 -#             %h6.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
