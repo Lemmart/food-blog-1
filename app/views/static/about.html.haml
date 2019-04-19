@@ -2,16 +2,13 @@
 %h3="About #{@user.username}"
 .main
     .left   
-        %p="Posts: #{@posts.length}"
+        %p="Posts: #{@user.posts.length}"
         %br
-        %p="Comments: #{@comments.length}"
     .right
         -@posts.each do |post|
             -# %p.image= image_tag post.image.attached? ? post.image.variant(resize: "100x100^") : 'images/noimg.jpeg'
             %h6.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
             %h6.card-subtitle.mb-2.text-muted.stars= "Rating: #{post.rating}"
-            - (1..post.rating).each do |s|
-                .stars.fas.fa-star
             %h6.card-subtitle.mb-2.text-muted= "Location: #{post.location}"
             %h6.card-subtitle.mb-2.text-muted= "User: #{@user.username}"
             %h6.card-subtitle.mb-2.text-muted= "Time: #{post.time}"
