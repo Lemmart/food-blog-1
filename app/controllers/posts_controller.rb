@@ -50,15 +50,9 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    # byebug
-
     @user = current_user
-    # byebug
     @post = Post.new(post_params)
     @post.user = current_user
-    puts (current_user)
-    # logger.warn(current_user)
-    # @post.user_id = current_user.id
     respond_to do |format|
       if @post.save
         format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
@@ -74,8 +68,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     @user = current_user
-    # @post.user = current_user
-    @post.user_id = current_user.id
+    @post.user = current_user
 
     respond_to do |format|
       if @post.update(post_params)
