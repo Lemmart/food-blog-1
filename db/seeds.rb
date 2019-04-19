@@ -45,7 +45,7 @@ when "development"
 
     a = Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
     a.comments.create!(user_id: "#{user1.id}", body: "best bagel ever")
-    a.comments.create!(user_id: "#{comment2.id}", body: "why is there a hole in the middle? isnt that a donut?")
+    a.comments.create!(user_id: "#{user2.id}", body: "why is there a hole in the middle? isnt that a donut?")
 
     b = Post.create!(user_id: "#{user2.id}", caption: "Toast", rating: "1", location: "Frank", time: "10:00am", tags:"#burnt")
     b.comments.create!(user_id: "#{user3.id}", body: "how do you mess up toast?")
@@ -75,6 +75,6 @@ when "production"
     comment2.save!(validate: true)
 
     a = Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
-    a.comments.create!(user_id: "#{user1.id}", body: "best bagel ever")
-    a.comments.create!(user_id: "#{user2.id}", body: "why is there a hole in the middle? isnt that a donut?")
+    a.comments.create!(user_id: "#{user1.id}", username: "#{user1.username}", body: "best bagel ever")
+    a.comments.create!(user_id: "#{user2.id}", username: "#{user2.username}", body: "why is there a hole in the middle? isnt that a donut?")
 end

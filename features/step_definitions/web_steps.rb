@@ -47,6 +47,12 @@ Given ("these Posts:") do |table|
   end
 end
 
+Given ("these Users:") do |table|
+  table.hashes.each do |p|
+    User.create!(p)
+  end
+end
+
 Given /^(?:|I )am on (.+)$/ do |page_name|
   user = FactoryBot.create(:user)
   login_as(user, :scope => :user, :run_callbacks => false)
@@ -269,22 +275,22 @@ end
 
 Then /^I should see that "(.*)" has a rating of (.*)$/ do |post, rating|
   j = all('.card.mb-3', text: /#{post}/)
-  expect(j[0].text).to match(/Rating: #{rating.to_i}/)
+  expect(j[0].text).to match(/Stars: #{rating}/)
 end
 
 Then /^I should see that the location for "(.*)" is "(.*)"$/ do |post, location|
   j = all('.card.mb-3', text: /#{post}/)
-  expect(j[0].text).to match(/Location: #{location}/)
+  expect(j[0].text).to match(/#{location}/)
 end
 
 Then /^I should see that "(.*)" has the tags "(.*)"$/ do |post, tags|
   j = all('.card.mb-3', text: /#{post}/)
-  expect(j[0].text).to match(/Tags: #{tags}/)
+  expect(j[0].text).to match(/#{tags}/)
 end
 
 Then /^I should see that "(.*)" has a time of "(.*)"$/ do |post, time|
   j = all('.card.mb-3', text: /#{post}/)
-  expect(j[0].text).to match(/Time: #{time}/)
+  expect(j[0].text).to match(/#{time}/)
 end
 
 Then(/I should see that "(.*)" has an image "(.*)"$/) do |post, img_name|
@@ -326,7 +332,26 @@ Then(/^I should see posts in age ascending order$/) do
   expect(titles).to eq(['Sushi', 'Chicken', 'Muffin', 'Bacon', 'Bagel'])
 end
 
+###################
+#    Sign In      #
+###################
 
+Given /^I am not authenticated$/ do
+  visit('/users/sign_out') # ensure that at least
+end
 
+Given /^I am a new, authenticated user with username: "(.*)"$/ do |username|
+  email = 'testing@gmail.com'
+  password = 'itsasecret'
 
+  visit '/users/sign_up'
+  
+  fill_in "user_email", :with => email
+  fill_in "Username", :with => username
+  fill_in "user_password", :with => password
+  fill_in "Password confirmation", :with => password
 
+  click_button "Sign up"
+  
+  visit '/posts'
+end
