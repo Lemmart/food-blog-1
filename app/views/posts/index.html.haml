@@ -1,8 +1,17 @@
 #main.container
   %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.8.1/css/all.css", :integrity => "sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf", :rel => "stylesheet"}/
   %link{:href => "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstra", :rel => "stylesheet"}/
-    
-  %p
+  
+  .left_index
+    %button.filter_button.btn.btn-warning{:type => "button"} Breakfast
+    %br
+    %button.filter_button.btn.btn-danger{:type => "button"} Lunch
+    %br
+    %button.filter_button.btn.btn-info{:type => "button"} Dinner
+    %br
+    %button.filter_button.btn.btn-secondary{:type => "button"} Snack
+    %br
+  .right_index
     -@posts.each do |post|
       .card.mb-3.posty
         .btn-group{"aria-label" => "Basic example", :role => "group"}
@@ -27,11 +36,13 @@
         =simple_form_for([post, post.comments.build]) do |f|
           = f.input :body 
           = f.button :submit
-    %br
-      %br
-    // Floating Button
-    %a.new-button{:href => new_post_path}
-      %i.fas.fa-plus.my-float
+
+
+
+
+  // Floating Button
+  %a.new-button{:href => new_post_path}
+    %i.fas.fa-plus.my-float
     
-    %a.about-button{:href => "/about"}
-      %i.fas.fa-user.my-float
+  %a.about-button{:href => "/about"}
+    %i.fas.fa-user.my-float

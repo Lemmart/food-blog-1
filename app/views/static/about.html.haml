@@ -1,17 +1,45 @@
-
+%link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.8.1/css/all.css", :integrity => "sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf", :rel => "stylesheet"}/
+%link{:href => "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstra", :rel => "stylesheet"}/
+  
 %h3="About #{@user.username}"
 .main
-    .left   
-        %p="Posts: #{@user.posts.length}"
-        %br
-    .right
-        -@user.posts.each do |post|
-            -# %p.image= image_tag post.image.attached? ? post.image.variant(resize: "100x100^") : 'images/noimg.jpeg'
-            %h6.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
-            %h6.card-subtitle.mb-2.text-muted.stars= "Rating: #{post.rating}"
-            %h6.card-subtitle.mb-2.text-muted= "Location: #{post.location}"
-            %h6.card-subtitle.mb-2.text-muted= "User: #{@user.username}"
-            %h6.card-subtitle.mb-2.text-muted= "Time: #{post.time}"
-            %h6.card-subtitle.mb-2.text-muted= "Tags: #{post.tags}"
+  .left   
+    %p="Posts: #{@user.posts.length}"
+    %br
+  .right
+    -# -@user.posts.each do |post|
+    -#     -# %p.image= image_tag post.image.attached? ? post.image.variant(resize: "100x100^") : 'images/noimg.jpeg'
+    -#     %h6.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
+    -#     %h6.card-subtitle.mb-2.text-muted.stars= "Rating: #{post.rating}"
+    -#     %h6.card-subtitle.mb-2.text-muted= "Location: #{post.location}"
+    -#     %h6.card-subtitle.mb-2.text-muted= "User: #{@user.username}"
+    -#     %h6.card-subtitle.mb-2.text-muted= "Time: #{post.time}"
+    -#     %h6.card-subtitle.mb-2.text-muted= "Tags: #{post.tags}"
+
+    -@posts.each do |post|
+      .card.mb-3.posty
+        .btn-group{"aria-label" => "Basic example", :role => "group"}
+          .btn.btn-secondary
+            .link-button=link_to("Delete", post_path(post), method: :delete)
+          .btn.btn-secondary
+            .link-button=link_to("Edit", edit_post_path(post))
+
+        - (1..post.rating).each do |s|
+          .stars.fas.fa-star
+
+        .card-body
+        %p.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
+
+        %h6.card-subtitle.mb-2.text-muted= "User: #{post.user.username}"
+        
+        .card-footer.text-muted.post-information= "#{post.location} || #{post.time} || #{post.tags} || Stars: #{post.rating}"
+
+        -post.comments.each do |c|
+          %p #{c.user.username}: #{c.body}
+        %p.comment Add a comment:
+        =simple_form_for([post, post.comments.build]) do |f|
+          = f.input :body 
+          = f.button :submit
+
 
 
