@@ -16,6 +16,26 @@ $background-color: #343a40;
     margin-right:15%;
 }
 
+.left_index {
+    margin-top:50px;
+    float:left;
+    width:100px;
+    scroll-margin: infinite;
+}
+
+.right_index{
+    margin-top:50px;
+    float:right;
+    width:1000px;
+    height:100px;
+}
+
+.filter_button{
+    width:150px;
+    align-content: center;
+    margin:8px;
+}
+
 .posty {
     margin: auto;
     width: 50%;
