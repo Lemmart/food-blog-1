@@ -15,6 +15,10 @@
           .stars.fas.fa-star
 
         .card-body
+        - if post.image_url
+          %img{ src: post.image_url }
+        - else
+          %p.image= image_tag 'noimg.jpeg', size: "400x400"
         %p.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
 
         %h6.card-subtitle.mb-2.text-muted= "User: #{post.user.username}"

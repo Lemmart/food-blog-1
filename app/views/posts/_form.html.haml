@@ -1,5 +1,5 @@
 %form-container
-  = form_with(model: post, local: true) do |form|
+  = form_with(model: post, local: true,  html: { class: 'directUpload',data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }}) do |form|
     .field
       = form.label :caption
       = form.text_field :caption, required: true
@@ -17,7 +17,7 @@
       = form.text_area :tags, required: true
     .field
       =form.label :image, "Image"
-      =form.file_field :image, accept: "image/png,image/gif,image/jpeg"
+      =form.file_field :image_url
 
     .field
       = form.submit "Create Post"

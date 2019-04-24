@@ -17,6 +17,11 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'mini_racer', platforms: :ruby
 
 gem "haml"
+# Image Hosting
+gem 'aws-sdk', '~> 2'
+gem 'jquery-rails'
+gem "figaro"
+
 
 # Authentication
 gem 'devise'

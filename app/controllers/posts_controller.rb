@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
   # GET /posts
   # GET /posts.json
   def index
@@ -53,6 +53,7 @@ class PostsController < ApplicationController
     @user = current_user
     @post = Post.new(post_params)
     @post.user = current_user
+    puts @post.image_url
     respond_to do |format|
       if @post.save
         format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
@@ -96,12 +97,17 @@ class PostsController < ApplicationController
     def set_post
       @post = Post.find(params[:id])
     end
-
+    
+    def set_s3_direct_post
+      @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+    end
+    
     def post_params
-      params.require(:post).permit(:caption, :rating, :location, :time, :tags, :image)
+      params.require(:post).permit(:caption, :rating, :location, :time, :tags, :image_url)
     end
 
     def search_params
       params.permit(:caption, :rating, :location, :time, :tags, :image, :search)
     end
+    
 end
