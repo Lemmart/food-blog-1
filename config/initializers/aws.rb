@@ -1,5 +1,5 @@
-ENV['AWS_ACCESS_KEY_ID'] = "AKIAI3LNUMEFPJOEYSQA"
-ENV['AWS_SECRET_ACCESS_KEY'] = "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"
+ENV['AWS_ACCESS_KEY_ID'] = 
+ENV['AWS_SECRET_ACCESS_KEY'] = 
 ENV['S3_BUCKET'] = "frankly-food1"
 Aws.config.update({
   region: 'us-east-2',
