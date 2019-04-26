@@ -53,7 +53,6 @@ class PostsController < ApplicationController
     @user = current_user
     @post = Post.new(post_params)
     @post.user = current_user
-    puts @post.image_url
     respond_to do |format|
       if @post.save
         format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
