@@ -16,6 +16,16 @@ $background-color: #343a40;
     margin-right:15%;
 }
 
+.imagey {
+    object-fit: cover;
+    width: 475px;
+    height: 400px;
+    // display: block;
+    // margin-left: auto;
+    // margin-right: auto;
+    // width: 50%;
+}
+
 .left_index {
     margin-top:50px;
     float:left;
@@ -33,7 +43,7 @@ $background-color: #343a40;
 .filter_button{
     width:150px;
     align-content: center;
-    margin:8px;
+    margin-top:8px;
 }
 
 .posty {
