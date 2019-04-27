@@ -20,10 +20,6 @@ $background-color: #343a40;
     object-fit: cover;
     width: 475px;
     height: 400px;
-    // display: block;
-    // margin-left: auto;
-    // margin-right: auto;
-    // width: 50%;
 }
 
 .left_index {
@@ -40,10 +36,12 @@ $background-color: #343a40;
     height:100px;
 }
 
-.filter_button{
+.filter_buttons{
     width:150px;
+    position:fixed;
     align-content: center;
-    margin-top:8px;
+    margin-top: 8px;
+    margin-bottom: 10px;
 }
 
 .posty {
