@@ -13,7 +13,6 @@
 
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require_tree .
 $(function() {
   $('.directUpload').find("input:file").each(function(i, elem) {
