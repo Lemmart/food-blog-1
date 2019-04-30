@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:github]
   has_many :posts
 
-  validates :email, :username, presence: true
+  validates :email, presence: true
 
   # # https://www.codementor.io/anaumov/rails-omniauth-with-devise--github-example-du107rmn7
   # def self.from_omniauth(auth)  
