@@ -1,4 +1,4 @@
-Feature: Delete a new post
+Feature: Delete a post
   As a blog user
   So that I can remove my post
   I want to delete a post
