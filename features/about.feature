@@ -12,9 +12,9 @@ Feature: View about page
             | t@mple.com     |   testtest  |  "four"    | 4  |
 
         Given these Posts:
-            | caption  | rating  | location  |  time    |   tags       | user_id  |
-            | Muffin   | 5       |  Frank    | 11:00pm  |   #GoodEATS  |   3      |
-            | Bacon    | 4       |  Coop     | 10:00am  |   #BACON     |   4      |
+            | caption  | rating  | location  |  time      |   tags       | user_id  |
+            | Muffin   | 5       |  Frank    | Snack      |   #GoodEATS  |   3      |
+            | Bacon    | 4       |  Coop     | Breakfast  |   #BACON     |   4      |
     
     Scenario: View about page
         Given I am a new, authenticated user with username: "Foodie"
@@ -25,11 +25,11 @@ Feature: View about page
     Scenario: View about page with previous posts displayed
         Given I am a new, authenticated user with username: "four"
         Given I am on the create new post page
+        When I select "Frank" from "Location"
+        When I select "Dinner" from "Time"
         When I fill in the following:
             | Caption   | Bagel           |
             | Rating    | 4               |
-            | Location  | Frank           |
-            | Time      | 10:00pm         |
             | Tags      | #yum            |
         When I press "Create Post"
         Then I should be on the post page

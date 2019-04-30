@@ -1,30 +1,34 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
+
   # GET /posts
   # GET /posts.json
   def index
     @user = current_user
-    s_params = search_params
-    if !s_params[:search].nil?
+    i_params = index_params
+    # Search term entered
+    if !i_params[:search].nil?
       tag_ids = []
-
       Post.all.each do |p|
-        if p.tags.include? s_params[:search]
+          if p.tags.include? i_params[:search]
           tag_ids.append(p.id)
-        end
+          end
       end
       if tag_ids.empty?
-        flash[:warning] = 'No results found.'
+          flash[:warning] = 'No results found.'
       end
-
       
       if !tag_ids.blank?
-        @posts = Post.where(:id => tag_ids).order('created_at DESC')
+          @posts = Post.where(:id => tag_ids).order('created_at DESC')
       else
-        # redirect to a "no results found" page/text block
-        @posts = Post.all.order('created_at DESC')
+          # redirect to a "no results found" page/text block
+          @posts = Post.all.order('created_at DESC')
       end
+    # Filter button clicked
+    elsif !i_params[:button_tag].nil?
+      # button filtering
+      @posts = helpers.filter(i_params[:button_tag])
     else
       @posts = Post.all.order('created_at DESC')
     end
@@ -104,9 +108,8 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:caption, :rating, :location, :time, :tags, :image_url)
     end
-
-    def search_params
-      params.permit(:caption, :rating, :location, :time, :tags, :image, :search)
-    end
     
+    def index_params
+      params.permit(:caption, :rating, :location, :time, :tags, :image, :search, :button_tag)
+    end
 end

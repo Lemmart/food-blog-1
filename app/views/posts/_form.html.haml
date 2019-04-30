@@ -5,16 +5,16 @@
       = form.text_field :caption, required: true
     .field
       = form.label :rating
-      = form.number_field :rating, required: true
+      = form.number_field :rating, min: 0, max: 5, required: true
     .field
       = form.label :location
-      = form.text_field :location, required: true
+      = form.select :location, ['Coop',"Donovan's Pub",'Frank','Library Cafe'], require: true
     .field
       = form.label :time
-      = form.text_field :time, required: true
+      = form.select :time, ['Breakfast', 'Lunch','Dinner','Snack'], require: true
     .field
       = form.label :tags
-      = form.text_area :tags, required: true
+      = form.text_field :tags, required: true
     .field
       =form.label :image, "Image"
       =form.file_field :image_url

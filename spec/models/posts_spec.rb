@@ -6,7 +6,7 @@ RSpec.describe Post, type: :model do
       user1 = User.create!(email: "arewein@example.com", password: "arewein", username: "arewein")
       user1.save!(validate: true)
 
-      rp = Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+      rp = Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "Dinner", tags:"#GoodEATS")
       expect(rp).to respond_to :caption
       expect(rp).to respond_to :rating
       expect(rp).to respond_to :location
@@ -15,7 +15,7 @@ RSpec.describe Post, type: :model do
     end
     
     # it "should fail to create a Post object if any values are missing" do
-    #   expect(Post.create!(rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")).to raise_exception(ActiveRecord::NotNullViolation)
+    #   expect(Post.create!(rating: "5", location: "Frank", time: "Dinner", tags:"#GoodEATS")).to raise_exception(ActiveRecord::NotNullViolation)
     # end
 
   end
@@ -36,8 +36,8 @@ RSpec.describe "show page", type: :feature do
     user2 = User.create!(email: "arewein@test.com", password: "areare", username: "are")
     user2.save!(validate: true)
 
-    Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
-    Post.create!(user_id: "#{user2.id}", caption: "Ice Cream", rating: "2", location: "Frank", time: "12:00pm", tags:"#ice")
+    Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "Dinner", tags:"#GoodEATS")
+    Post.create!(user_id: "#{user2.id}", caption: "Ice Cream", rating: "2", location: "Frank", time: "Lunch", tags:"#ice")
     visit "/posts"
   end
   
@@ -75,31 +75,17 @@ RSpec.describe "show page", type: :feature do
     user4 = User.create!(email: "le@example.com", password: "example", username: "four")
     user4.save!(validate: true)
     
-    rp = Post.create!(user_id: "#{user4.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+    rp = Post.create!(user_id: "#{user4.id}", caption: "Bagel", rating: "5", location: "Frank", time: "Dinner", tags:"#GoodEATS")
     Post.destroy(rp.id)
     rp2 = Post.find_by_id(rp.id)
     expect(rp2).to be_nil
   end
 
-  # it "should be able to update a Post object" do
-  #   rp = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
-  #   rp.update(:caption => "cookie")
-    
-  #   # expect(page).to have_link("Bagel")
-  #   # click_link("Bagel")
-  #   # expect(page).to have_link("Edit")
-  #   # click_link("Edit")
-  #   # fill_in "Caption", :with => "cookie"
-  #   # click_button("Create Post")
-
-  #   expect(rp.caption).to eq("cookie")
-  # end
-
   it "should be able to delete a Post object" do
     user5 = User.create!(email: "plen@test.com", password: "examplen", username: "five")
     user5.save!(validate: true)
     
-    rp = Post.create!(user_id: "#{user5.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+    rp = Post.create!(user_id: "#{user5.id}", caption: "Bagel", rating: "5", location: "Frank", time: "Dinner", tags:"#GoodEATS")
     rp.destroy
     expect(Post.find_by_id(rp.id)).to eq(nil)
   end

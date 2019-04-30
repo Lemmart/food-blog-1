@@ -4,10 +4,16 @@
   
   .left_index
     .btn-group-vertical.filter_buttons{"data-toggle" => "buttons"}
-      %button.btn.btn-warning{:type => "button"} Breakfast
-      %button.btn.btn-danger{:type => "button"} Lunch
-      %button.btn.btn-info{:type => "button"} Dinner
-      %button.btn.btn-secondary{:type => "button"} Snack
+      %button.btn.btn-warning{:type => "button"}
+        %a{:href => posts_path(:button_tag => "Breakfast"), :style => "color:inherit", :method => :get} Breakfast
+      %button.btn.btn-danger{:type => "button"}
+        %a{:href => posts_path(:button_tag => "Lunch"), :style => "color:inherit", :method => :get} Lunch
+      %button.btn.btn-info{:type => "button"}
+        %a{:href => posts_path(:button_tag => "Dinner"), :style => "color:inherit", :method => :get} Dinner
+      %button.btn.btn-secondary{:type => "button"}
+        %a{:href => posts_path(:button_tag => "Snack"), :style => "color:inherit", :method => :get} Snack
+
+  %br
   .right_index
     -@posts.each do |post|
       .card.mb-3.posty

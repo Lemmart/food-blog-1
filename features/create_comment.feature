@@ -9,9 +9,8 @@ Feature: Create a new comment
             |     email      |   password  |  username  | id |
             | t@example.com  |   testtest  |  "Foodie"  | 1  |
         Given these Posts:
-            | caption  | rating  | location  |  time    |   tags       | user_id |
-            | Bagel    | 5       |  Frank    | 10:00pm  |   #GoodEATS  |    1    |
-            # | Bacon    | 4       |  Coop     | 10:00am  |   #BACON     |
+            | caption  | rating  | location  |  time      |   tags       | user_id |
+            | Bagel    | 5       |  Frank    | Breakfast  |   #GoodEATS  |    1    |
     
     Scenario: Add a comment to a post
         Given I am a new, authenticated user with username: "Foodie"

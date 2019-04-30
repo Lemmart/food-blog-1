@@ -10,7 +10,7 @@ RSpec.describe Comment, type: :model do
       comment1 = User.create!(email: "arein@example.com", password: "arewein", username: "anon")
       comment1.save!(validate: true)
 
-      rp = Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+      rp = Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "Dinner", tags:"#GoodEATS")
       rp.comments.create!(user_id: "#{user1.id}", username: "#{comment1.username}", body: "best bagel ever")
       expect(rp.comments[0][:username]).to eql("anon")
       expect(rp.comments[0][:body]).to eql("best bagel ever")
@@ -25,7 +25,7 @@ RSpec.describe Comment, type: :model do
       comment2 = User.create!(email: "wein@test.com", password: "areare", username: "anon2")
       comment2.save!(validate: true)
 
-      rp = Post.create!(user_id: "#{user2.id}", caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
+      rp = Post.create!(user_id: "#{user2.id}", caption: "Bagel", rating: "5", location: "Frank", time: "Dinner", tags:"#GoodEATS")
       rp.comments.create!(user_id: "#{user2.id}", username: "#{comment1.username}", body: "best bagel ever")
       rp.comments.create!(user_id: "#{user2.id}", username: "#{comment2.username}", body: "worst bagel ever")
       expect(rp.comments[0][:username]).to eql("anon")
@@ -44,27 +44,3 @@ RSpec.describe CommentsController do
   it { is_expected.to respond_to(:show) }
   it { is_expected.to respond_to(:create) }
 end
-
-    
-
-    # it "should have an index method" do
-    #   bagel = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
-    #   expect(bagel).to respond_to(:index)
-    # end
-
-    # it "should have an edit method" do
-    #   bagel = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
-    #   expect(bagel).to respond_to(:edit)
-    # end
-
-    # it "should have an create method" do
-    #   bagel = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
-    #   expect(bagel).to respond_to(:create)
-    # end
-
-    # it "should have an show method" do
-    #   bagel = Post.create!(caption: "Bagel", rating: "5", location: "Frank", time: "10:00pm", tags:"#GoodEATS")
-    #   expect(bagel).to respond_to(:show)
-    # end
-#   end
-# end
