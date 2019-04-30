@@ -17,7 +17,7 @@
             %a.nav-link{:href => posts_path} Frank.ly
           %li.nav-item
             %a.nav-link{:href => "/about"} About
-        -if current_page?(posts_path)
+        -if current_page?(posts_path) || current_page?('/')
           %form.form-inline.my-2.my-lg-0.right-align
             %input.form-control.mr-sm-2{:placeholder => "#search_tag", :type => "text", :name => "search"}/
             %button.btn.btn-secondary.my-2.my-sm-0{:type => "submit"} Search
