@@ -343,7 +343,7 @@ end
 Given /^I am a new, authenticated user with username: "(.*)"$/ do |username|
   email = 'testing@gmail.com'
   password = 'itsasecret'
-
+  
   visit '/users/sign_up'
   
   fill_in "user_email", :with => email

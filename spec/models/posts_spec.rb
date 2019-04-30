@@ -36,8 +36,10 @@ RSpec.describe "show page", type: :feature do
     user2 = User.create!(email: "arewein@test.com", password: "areare", username: "are")
     user2.save!(validate: true)
 
-    Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "Dinner", tags:"#GoodEATS")
-    Post.create!(user_id: "#{user2.id}", caption: "Ice Cream", rating: "2", location: "Frank", time: "Lunch", tags:"#ice")
+    Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "Breakfast", tags:"#GoodEATS")
+    Post.create!(user_id: "#{user2.id}", caption: "Pizza", rating: "2", location: "Coop", time: "Lunch", tags:"#cheesy")
+    Post.create!(user_id: "#{user1.id}", caption: "Pasta", rating: "3", location: "Coop", time: "Dinner", tags:"#buttery")
+    Post.create!(user_id: "#{user2.id}", caption: "Ice Cream", rating: "2", location: "Frank", time: "Snack", tags:"#ice")
     visit "/posts"
   end
   
@@ -51,7 +53,7 @@ RSpec.describe "show page", type: :feature do
     first(:link, "Delete").click
     visit "/posts"
     page.all(".titley").each { |x| names << x.text }
-    expect(names.length).to eq(1)
+    expect(names.length).to eq(3)
     Warden.test_reset!
   end
 
@@ -67,7 +69,7 @@ RSpec.describe "show page", type: :feature do
     first(:link, "Delete").click
     visit "/posts"
     page.all(".titley").each { |x| names << x.text }
-    expect(names.length).to eq(0)
+    expect(names.length).to eq(2)
     Warden.test_reset! 
   end
 
@@ -88,5 +90,41 @@ RSpec.describe "show page", type: :feature do
     rp = Post.create!(user_id: "#{user5.id}", caption: "Bagel", rating: "5", location: "Frank", time: "Dinner", tags:"#GoodEATS")
     rp.destroy
     expect(Post.find_by_id(rp.id)).to eq(nil)
+  end
+
+  it "should be able to filter for each time of day" do
+    # Mock user
+    user = FactoryBot.create(:user)
+    login_as(user, :scope => :user, :run_callbacks => false)
+    user.save!(validate: false)
+    click_button "Log in"
+
+    visit "/posts"
+    # Test Filter Presence
+    expect(page).to have_link("Breakfast")
+    expect(page).to have_link("Lunch")
+    expect(page).to have_link("Dinner")
+    expect(page).to have_link("Snack")
+
+    posts = {"Breakfast" => 0, "Lunch" => 0, "Dinner" => 0, "Snack" => 0}
+    incorrect_matches = 0
+
+    # Build matches
+    first(:link, "Breakfast").click
+    page.all(".titley").each { |x| if x.text == "Bagel" then posts["Breakfast"] += 1 else incorrect_matches += 1 end}
+    first(:link, "Lunch").click
+    page.all(".titley").each { |x| if x.text == "Pizza" then posts["Lunch"] += 1 else incorrect_matches += 1 end}
+    first(:link, "Dinner").click
+    page.all(".titley").each { |x| if x.text == "Pasta" then posts["Dinner"] += 1 else incorrect_matches += 1 end}
+    first(:link, "Snack").click
+    page.all(".titley").each { |x| if x.text == "Ice Cream" then posts["Snack"] += 1 else incorrect_matches += 1 end}
+    
+    # Test matches were present and no additional posts were found
+    expect(posts["Breakfast"]).to eq(1)
+    expect(posts["Lunch"]).to eq(1)
+    expect(posts["Dinner"]).to eq(1)
+    expect(posts["Snack"]).to eq(1)
+    expect(incorrect_matches).to eq(0)
+    Warden.test_reset! 
   end
 end
