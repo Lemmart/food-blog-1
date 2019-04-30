@@ -88,16 +88,10 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
+    @post.destroy
     respond_to do |format|
-      if current_user.id == @post.user_id
-        byebug
-        @post.destroy
         format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
         format.json { head :no_content }
-      else
-        format.html { redirect_to posts_url, warning: 'Failed to delete post.' }
-        format.json { head :no_content }
-      end
     end
   end
 

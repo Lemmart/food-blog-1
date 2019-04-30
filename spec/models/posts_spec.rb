@@ -49,7 +49,6 @@ RSpec.describe "show page", type: :feature do
     expect(page).to have_link("Delete")
     names = [] 
     first(:link, "Delete").click
-    # click_link('Delete', :text => 'Delete', match: :first)    # possible alternative, but not working
     visit "/posts"
     page.all(".titley").each { |x| names << x.text }
     expect(names.length).to eq(1)
