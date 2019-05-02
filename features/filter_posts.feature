@@ -11,11 +11,11 @@ Feature: Filter a post
       | t@ex.com       |   testtest  |  "Bill"    | 3  |
       | t@exa.com      |   testtest  |  "Jake"    | 4  |
     Given these Posts:
-      | caption   | rating  | location  |  time     |   tags       | user_id |
-      | Bagel     | 5       |  Frank    | Snack     |   #GoodEATS  |    1    |
-      | Bacon     | 4       |  Coop     | Breakfast |   #BACON     |    2    |
-      | Sandwich  | 3       |  Frank    | Lunch     |   #muffins   |    3    |
-      | Salmon    | 3       |  Frank    | Dinner    |   #fresh     |    4    |
+      | caption   | rating  | location          |  time     |   tags       | user_id |
+      | Bagel     | 5       |  Frank            | Snack     |   #GoodEATS  |    1    |
+      | Bacon     | 4       |  Coop             | Breakfast |   #BACON     |    2    |
+      | Sandwich  | 3       |  Donovan's Pub    | Lunch     |   #muffins   |    3    |
+      | Salmon    | 3       |  Library Cafe     | Dinner    |   #fresh     |    4    |
   
   Scenario: Filter posts by time of day
     # Given I am a new, authenticated user with username: "Jacob"
@@ -30,5 +30,20 @@ Feature: Filter a post
     Then I should be on the posts page
     And I should see "Salmon"
     When I press "Snack"
+    Then I should be on the posts page
+    And I should see "Bagel"
+  
+  Scenario: Filter posts by location
+    Given I am on the posts page
+    When I press "Coop"
+    Then I should be on the posts page
+    And I should see "Bacon"
+    When I press "Donovan's Pub"
+    Then I should be on the posts page
+    And I should see "Sandwich"
+    When I press "Library Cafe"
+    Then I should be on the posts page
+    And I should see "Salmon"
+    When I press "Frank"
     Then I should be on the posts page
     And I should see "Bagel"

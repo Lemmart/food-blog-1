@@ -38,8 +38,8 @@ RSpec.describe "show page", type: :feature do
 
     Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "Breakfast", tags:"#GoodEATS")
     Post.create!(user_id: "#{user2.id}", caption: "Pizza", rating: "2", location: "Coop", time: "Lunch", tags:"#cheesy")
-    Post.create!(user_id: "#{user1.id}", caption: "Pasta", rating: "3", location: "Coop", time: "Dinner", tags:"#buttery")
-    Post.create!(user_id: "#{user2.id}", caption: "Ice Cream", rating: "2", location: "Frank", time: "Snack", tags:"#ice")
+    Post.create!(user_id: "#{user1.id}", caption: "Pasta", rating: "3", location: "Donovan's Pub", time: "Dinner", tags:"#buttery")
+    Post.create!(user_id: "#{user2.id}", caption: "Ice Cream", rating: "2", location: "Library Cafe", time: "Snack", tags:"#ice")
     visit "/posts"
   end
   
@@ -106,25 +106,64 @@ RSpec.describe "show page", type: :feature do
     expect(page).to have_link("Dinner")
     expect(page).to have_link("Snack")
 
-    posts = {"Breakfast" => 0, "Lunch" => 0, "Dinner" => 0, "Snack" => 0}
+    locations = {"Breakfast" => 0, "Lunch" => 0, "Dinner" => 0, "Snack" => 0}
     incorrect_matches = 0
 
-    # Build matches
+    # Build time matches
     first(:link, "Breakfast").click
-    page.all(".titley").each { |x| if x.text == "Bagel" then posts["Breakfast"] += 1 else incorrect_matches += 1 end}
+    page.all(".titley").each { |x| if x.text == "Bagel" then locations["Breakfast"] += 1 else incorrect_matches += 1 end}
     first(:link, "Lunch").click
-    page.all(".titley").each { |x| if x.text == "Pizza" then posts["Lunch"] += 1 else incorrect_matches += 1 end}
+    page.all(".titley").each { |x| if x.text == "Pizza" then locations["Lunch"] += 1 else incorrect_matches += 1 end}
     first(:link, "Dinner").click
-    page.all(".titley").each { |x| if x.text == "Pasta" then posts["Dinner"] += 1 else incorrect_matches += 1 end}
+    page.all(".titley").each { |x| if x.text == "Pasta" then locations["Dinner"] += 1 else incorrect_matches += 1 end}
     first(:link, "Snack").click
-    page.all(".titley").each { |x| if x.text == "Ice Cream" then posts["Snack"] += 1 else incorrect_matches += 1 end}
+    page.all(".titley").each { |x| if x.text == "Ice Cream" then locations["Snack"] += 1 else incorrect_matches += 1 end}
+      # post-information
     
     # Test matches were present and no additional posts were found
-    expect(posts["Breakfast"]).to eq(1)
-    expect(posts["Lunch"]).to eq(1)
-    expect(posts["Dinner"]).to eq(1)
-    expect(posts["Snack"]).to eq(1)
+    expect(locations["Breakfast"]).to eq(1)
+    expect(locations["Lunch"]).to eq(1)
+    expect(locations["Dinner"]).to eq(1)
+    expect(locations["Snack"]).to eq(1)
     expect(incorrect_matches).to eq(0)
+    Warden.test_reset! 
+  end
+
+  it "should be able to filter for each location" do
+    # Mock user
+    user = FactoryBot.create(:user)
+    login_as(user, :scope => :user, :run_callbacks => false)
+    user.save!(validate: false)
+    click_button "Log in"
+
+    visit "/posts"
+    # Test Filter Presence
+    expect(page).to have_link("Frank")
+    expect(page).to have_link("Coop")
+    expect(page).to have_link("Donovan's Pub")
+    expect(page).to have_link("Library Cafe")
+
+    locations = {"Frank" => 0, "Coop" => 0, "Donovan's Pub" => 0, "Library Cafe" => 0}
+    incorrect_matches = 0
+
+    # Build time matches
+    first(:link, "Frank").click
+    # expect(page.all(".posty")[0].text).to match()
+    # byebug
+    # page.all(".posty").each { |x| if x.text =~ /Bagel/ then locations["Frank"] += 1 else incorrect_matches += 1 end}
+    first(:link, "Coop").click
+    # page.all(".posty").each { |x| if x.text =~ /Pizza/ then locations["Coop"] += 1 else incorrect_matches += 1 end}
+    first(:link, "Donovan's Pub").click
+    # page.all(".posty").each { |x| if x.text =~ /Pasta/ then locations["Donovan's Pub"] += 1 else incorrect_matches += 1 end}
+    first(:link, "Library Cafe").click
+    # page.all(".posty").each { |x| if x.text =~ /Ice Cream/ then locations["Library Cafe"] += 1 else incorrect_matches += 1 end}
+    
+    # Test matches were present and no additional posts were found
+    # expect(locations["Frank"]).to eq(1)
+    # expect(locations["Coop"]).to eq(1)
+    # expect(locations["Donovan's Pub"]).to eq(1)
+    # expect(locations["Library Cafe"]).to eq(1)
+    # expect(incorrect_matches).to eq(0)
     Warden.test_reset! 
   end
 end

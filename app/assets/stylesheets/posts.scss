@@ -37,12 +37,17 @@ $background-color: #343a40;
     height:100px;
 }
 
-.filter_buttons{
-    width:150px;
+.time_buttons{
+    width: 10.5%;
     position:fixed;
     align-content: center;
-    margin-top: 8px;
-    margin-bottom: 10px;
+}
+
+.location_buttons{
+    width: 10.5%;
+    position:fixed;
+    align-content: center;
+    top: 55%;
 }
 
 .posty {
