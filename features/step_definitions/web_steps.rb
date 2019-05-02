@@ -81,6 +81,10 @@ When /^(?:|I )fill in "([^"]*)" for "([^"]*)"$/ do |value, field|
   fill_in(field, :with => value)
 end
 
+When /^(?:|I )add an image with a name of "([^"]*)"$/ do |string|
+  page.attach_file("post_image_url", Rails.root + "app/assets/images/#{string}.jpg")
+end
+
 # Use this to fill in an entire form with data from a table. Example:
 #
 #   When I fill in the following:
@@ -295,6 +299,14 @@ end
 
 Then(/I should see that "(.*)" has an image "(.*)"$/) do |post, img_name|
   expect(page).to have_css("img[src*=#{img_name}]")
+end
+
+Then(/I should see that "(.*)" does not have an image "(.*)"$/) do |post, img_name|
+  page.should have_no_content("img[src*=#{img_name}]")
+end
+
+Then(/I should see that "(.*)" has an image filled/) do |post|
+  page.should have_content("Image: #<ActionDispatch::Http::UploadedFile")
 end
 
 ###################
