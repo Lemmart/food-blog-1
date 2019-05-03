@@ -23,6 +23,7 @@
         %td= @post.tags  
 .right_show
   = @post.image_url
+  
   - if @post.image_url
     %img.imagey{ src: @post.image_url }
   - else
