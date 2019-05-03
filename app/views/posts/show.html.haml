@@ -8,7 +8,11 @@
     = @post.rating
   %p
     %strong Image:
-    = @post.image_url
+    %br
+    - if @post.image_url
+      %img.imagey{ src: @post.image_url }
+    - else
+      %img.imagey{ src: "https://s3.us-east-2.amazonaws.com/frankly-food1/uploads/noimg.jpeg" }
   %p
     %strong Location:
     = @post.location
