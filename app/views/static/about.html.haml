@@ -9,15 +9,6 @@
     %p="Posts: #{@user.posts.length}"
     %br
   .right
-    -# -@user.posts.each do |post|
-    -#     -# %p.image= image_tag post.image.attached? ? post.image.variant(resize: "100x100^") : 'images/noimg.jpeg'
-    -#     %h6.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
-    -#     %h6.card-subtitle.mb-2.text-muted.stars= "Rating: #{post.rating}"
-    -#     %h6.card-subtitle.mb-2.text-muted= "Location: #{post.location}"
-    -#     %h6.card-subtitle.mb-2.text-muted= "User: #{@user.username}"
-    -#     %h6.card-subtitle.mb-2.text-muted= "Time: #{post.time}"
-    -#     %h6.card-subtitle.mb-2.text-muted= "Tags: #{post.tags}"
-
     -@posts.each do |post|
       .card.mb-3.posty
         .btn-group{"aria-label" => "Basic example", :role => "group"}
@@ -25,27 +16,59 @@
             .link-button=link_to("Delete", post_path(post), method: :delete)
           .btn.btn-secondary
             .link-button=link_to("Edit", edit_post_path(post))
- 
-        %h6.card-subtitle.mb-2.text-muted= "User: #{post.user.username}"
 
+        %h5.card-subtitle.mb-2.text-muted= "#{post.user.username}"
+
+        // STARS DISPLAY
         - (1..post.rating).each do |s|
           .stars.fas.fa-star
-        .card-body
+
+        // IMAGE DISPLAY
         - if post.image_url
           %img.imagey{ src: post.image_url }
         - else
           %img.imagey{ src: "https://s3.us-east-2.amazonaws.com/frankly-food1/uploads/noimg.jpeg" }
+        
+        //LINK TO SHOW PAGE
+        %p.card-text.titley.stars= link_to("#{post.caption}", post_path(post), method: :get)
+        %p.stars="Stars: #{post.rating}"
+        %br
 
-        %p.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
+        //TIME DISPLAY
+        - if(post.time == "Breakfast")
+          .btn.btn-warning.btn-sm.no_hover Breakfast
+        - elsif(post.time == "Lunch")  
+          .btn.btn-danger.btn-sm.no_hover Lunch
+        - elsif(post.time == "Dinner")
+          .btn.btn-info.btn-sm.no_hover Dinner
+        - elsif(post.time == "Snack")
+          .btn.btn-secondary.btn-sm.no_hover Snack
 
-        .card-footer.text-muted.post-information= "#{post.location} || #{post.time} || #{post.tags} || Stars: #{post.rating}"
+        //LOCATION DISPLAY
+        //.card-footer.text-muted= "#{post.location} || #{post.time} || #{post.tags} || Stars: #{post.rating}"
+        //%p= "#{link_to("#{post.caption}", post_path(post), method: :get)} #{post.tags} Stars: #{post.rating}"
+        - if(post.location == "Coop")
+          .btn.btn-outline-warning.btn-sm.no_hover Coop
+        - elsif(post.location == "Frank")  
+          .btn.btn-outline-info.btn-sm.no_hover Frank
+        - elsif(post.location == "Donovan's Pub")
+          .btn.btn-outline-danger.btn-sm.no_hover Donovan's Pub
+        - elsif(post.location == "Library Cafe")
+          .btn.btn-outline-success.btn-sm.no_hover Library Cafe
 
-        -post.comments.each do |c|
-          %p #{c.user.username}: #{c.body}
-        %p.comment Add a comment:
-        =simple_form_for([post, post.comments.build]) do |f|
-          = f.input :body 
-          = f.button :submit
+       
+        
+        //TAGS DISPLAY
+        .btn.btn-outline-secondary.btn-sm.no_hover.tag_button= post.tags
+
+        %br 
+        //COMMENTS
+        .card-footer.text-muted
+          -post.comments.each do |c|
+            %p= "#{c.user.username}: #{c.body}"
+          =simple_form_for([post, post.comments.build]) do |f|
+            = f.input :body 
+            = f.button :submit
 
 
 
