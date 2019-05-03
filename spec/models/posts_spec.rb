@@ -38,13 +38,8 @@ RSpec.describe "show page", type: :feature do
 
     Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "Breakfast", tags:"#GoodEATS", image_url: "fastfood")
     Post.create!(user_id: "#{user2.id}", caption: "Pizza", rating: "2", location: "Coop", time: "Lunch", tags:"#cheesy")
-<<<<<<< HEAD
     Post.create!(user_id: "#{user1.id}", caption: "Pasta", rating: "3", location: "Donovan's Pub", time: "Dinner", tags:"#buttery")
     Post.create!(user_id: "#{user2.id}", caption: "Ice Cream", rating: "2", location: "Library Cafe", time: "Snack", tags:"#ice")
-=======
-    Post.create!(user_id: "#{user1.id}", caption: "Pasta", rating: "3", location: "Coop", time: "Dinner", tags:"#buttery")
-    Post.create!(user_id: "#{user2.id}", caption: "Ice Cream", rating: "2", location: "Frank", time: "Snack", tags:"#ice", image_url: "cone")
->>>>>>> 6c6b665e705c6340e2d2ca0cf958258d4db294b7
     visit "/posts"
   end
   
