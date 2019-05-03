@@ -5,7 +5,6 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    flash[:notice] = "FLASHING U!"
     @user = current_user
     i_params = index_params
     # Search term entered
