@@ -34,14 +34,14 @@ Feature: Create a new post with an image
       And I should see that "Omelette" has a time of "Breakfast"
       And I should see that "Omelette" does not have an image "noimg"
       When I follow "Omelette"
-      Then I should see "Rating: 4"
-      And I should see "Caption: Omelette"
-      And I should see "Location: Coop"
-      And I should see "Time: Breakfast"
-      And I should see "Tags: #tomatoes #yum"
+      Then I should see "Rating 4"
+      And I should see "Caption Omelette"
+      And I should see "Location Coop"
+      And I should see "Time Breakfast"
+      And I should see "Tags #tomatoes #yum"
       And I should see that "Omelette" has an image filled
       
-    Scenario: Create a new post with aanother specific image
+    Scenario: Create a new post with another specific image
       Given I am a new, authenticated user with username: "Ice Cream Lover"
       Given I am on the create new post page
       When I select "Frank" from "Location"
@@ -60,11 +60,11 @@ Feature: Create a new post with an image
       And I should see that "Cone" has a time of "Dinner"
       And I should see that "Cone" does not have an image "noimg"
       When I follow "Cone"
-      Then I should see "Rating: 5"
-      And I should see "Caption: Cone"
-      And I should see "Location: Frank"
-      And I should see "Time: Dinner"
-      And I should see "Tags: #cold"
+      Then I should see "Rating 5"
+      And I should see "Caption Cone"
+      And I should see "Location Frank"
+      And I should see "Time Dinner"
+      And I should see "Tags #cold"
       And I should see that "Cone" has an image filled
       
     
