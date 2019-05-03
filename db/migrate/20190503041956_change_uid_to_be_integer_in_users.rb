@@ -1,5 +1,6 @@
 class ChangeUidToBeIntegerInUsers < ActiveRecord::Migration[5.2]
   def change
-    change_column :users, :uid, :integer
+    remove_column :users, :uid
+    add_column :users, :uid, :integer
   end
 end
