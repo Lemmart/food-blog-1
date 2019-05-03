@@ -306,7 +306,7 @@ Then(/I should see that "(.*)" does not have an image "(.*)"$/) do |post, img_na
 end
 
 Then(/I should see that "(.*)" has an image filled/) do |post|
-  page.should have_content("Image: #<ActionDispatch::Http::UploadedFile")
+  page.should have_content("#<ActionDispatch::Http::UploadedFile")
 end
 
 ###################

@@ -39,7 +39,7 @@ RSpec.describe "show page", type: :feature do
     Post.create!(user_id: "#{user1.id}", caption: "Bagel", rating: "5", location: "Frank", time: "Breakfast", tags:"#GoodEATS", image_url: "fastfood")
     Post.create!(user_id: "#{user2.id}", caption: "Pizza", rating: "2", location: "Coop", time: "Lunch", tags:"#cheesy")
     Post.create!(user_id: "#{user1.id}", caption: "Pasta", rating: "3", location: "Donovan's Pub", time: "Dinner", tags:"#buttery")
-    Post.create!(user_id: "#{user2.id}", caption: "Ice Cream", rating: "2", location: "Library Cafe", time: "Snack", tags:"#ice")
+    Post.create!(user_id: "#{user2.id}", caption: "Ice Cream", rating: "2", location: "Library Cafe", time: "Snack", tags:"#ice", image_url: "cone")
     visit "/posts"
   end
   
@@ -52,7 +52,7 @@ RSpec.describe "show page", type: :feature do
     first(:link, "Bagel").click
     visit "/posts/1"
     expect(page).to have_text("Bagel")
-    expect(page).to have_text("Location: Frank")
+    expect(page).to have_text("Location Frank")
     expect(page).to have_link("Edit")
     expect(page).to have_link("Delete")
     expect(page).to have_link("Back")
@@ -76,7 +76,7 @@ RSpec.describe "show page", type: :feature do
     expect(page).to have_link("Back")
     expect(page).to have_content("cone")
     expect(page).to have_no_css("fastfood")
-    expect(page).to have_no_css("cone")
+    expect(page).to have_no_css("noimg")
     Warden.test_reset! 
   end
 
