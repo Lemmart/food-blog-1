@@ -2,7 +2,7 @@
   %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.8.1/css/all.css", :integrity => "sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf", :rel => "stylesheet"}/
   %link{:href => "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstra", :rel => "stylesheet"}/
   
-  .left_index
+  .filter_panel
     .btn-group-vertical.time_buttons{"data-toggle" => "buttons"}
       %button.btn.btn-warning{:type => "button"}
         %a{:href => posts_path(:button_tag => "Breakfast"), :style => "color:inherit", :method => :get} Breakfast
@@ -14,17 +14,16 @@
         %a{:href => posts_path(:button_tag => "Snack"), :style => "color:inherit", :method => :get} Snack
         
     .btn-group-vertical.location_buttons{"data-toggle" => "buttons"}
-      %button.btn.btn-warning{:type => "button"}
+      %button.btn.btn-outline-warning{:type => "button"}
         %a{:href => posts_path(:button_tag => "Coop"), :style => "color:inherit", :method => :get} Coop
-      %button.btn.btn-danger{:type => "button"}
+      %button.btn.btn-outline-danger{:type => "button"}
         %a{:href => posts_path(:button_tag => "Donovan's Pub"), :style => "color:inherit", :method => :get} Donovan's Pub
-      %button.btn.btn-info{:type => "button"}
+      %button.btn.btn-outline-info{:type => "button"}
         %a{:href => posts_path(:button_tag => "Frank"), :style => "color:inherit", :method => :get} Frank
-      %button.btn.btn-secondary{:type => "button"}
+      %button.btn.btn-outline-success{:type => "button"}
         %a{:href => posts_path(:button_tag => "Library Cafe"), :style => "color:inherit", :method => :get} Library Cafe
 
-  %br
-  .right_index
+  .post_panel
     -@posts.each do |post|
       .card.mb-3.posty
         .btn-group{"aria-label" => "Basic example", :role => "group"}
@@ -40,28 +39,52 @@
           .stars.fas.fa-star
 
         // IMAGE DISPLAY
-        
         - if post.image_url
           %img.imagey{ src: post.image_url }
         - else
           %img.imagey{ src: "https://s3.us-east-2.amazonaws.com/frankly-food1/uploads/noimg.jpeg" }
-        %p.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
         
-        .card-footer.text-muted.post-information= "#{post.location} || #{post.time} || #{post.tags} || Stars: #{post.rating}"
+        //LINK TO SHOW PAGE
+        //%p.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
+        
+        //LOCATION DISPLAY
+        //.card-footer.text-muted= "#{post.location} || #{post.time} || #{post.tags} || Stars: #{post.rating}"
+        %p= "#{post.caption} #{post.tags}"
 
-        -post.comments.each do |c|
-          %p #{c.user.username}: #{c.body}
-        %p.comment Add a comment:
-        =simple_form_for([post, post.comments.build]) do |f|
-          = f.input :body 
-          = f.button :submit
+        - if(post.location == "Coop")
+          %button.btn.btn-outline-warning.btn-sm.no_hover Coop
+        - elsif(post.location == "Frank")  
+          %button.btn.btn-outline-info.btn-sm.no_hover Frank
+        - elsif(post.location == "Donovan's Pub")
+          %button.btn.btn-outline-danger.btn-sm.no_hover Donovan's Pub
+        - elsif(post.location == "Library Cafe")
+          %button.btn.btn-outline-success.btn-sm.no_hover Library Cafe
+
+        //TIME DISPLAY
+        - if(post.time == "Breakfast")
+          %button.btn.btn-warning.btn-sm.no_hover Breakfast
+        - elsif(post.time == "Lunch")  
+          %button.btn.btn-danger.btn-sm.no_hover Lunch
+        - elsif(post.time == "Dinner")
+          %button.btn.btn-info.btn-sm.no_hover Dinner
+        - elsif(post.time == "Snack")
+          %button.btn.btn-success.btn-sm.no_hover Snack
+
+        //COMMENTS
+        .card-footer.text-muted
+          -post.comments.each do |c|
+            %p= "#{c.user.username}: #{c.body}"
+          =simple_form_for([post, post.comments.build]) do |f|
+            = f.input :body 
+            = f.button :submit
 
 
 
-
-  // Floating Button
-  %a.new-button{:href => new_post_path}
-    %i.fas.fa-plus.my-float
-    
-  %a.about-button{:href => "/about"}
-    %i.fas.fa-user.my-float
+  .right_button_panel
+    // Floating Button
+    %a.new-button{:href => new_post_path}
+      %i.fas.fa-plus.my-float
+      
+    %a.about-button{:href => "/about"}
+      %i.fas.fa-user.my-float
+  

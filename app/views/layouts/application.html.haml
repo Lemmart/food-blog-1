@@ -6,8 +6,6 @@
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
-  %br
-  %body
     %nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
       %button.navbar-toggler{"aria-controls" => "navbarColor03", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarColor03", "data-toggle" => "collapse", :type => "button"}
         %span.navbar-toggler-icon
@@ -17,11 +15,12 @@
             %a.nav-link{:href => posts_path} Frank.ly
           %li.nav-item
             %a.nav-link{:href => "/about"} About
+
         -if current_page?(posts_path) || current_page?('/')
           %form.form-inline.my-2.my-lg-0.right-align
             %input.form-control.mr-sm-2{:placeholder => "#search_tag", :type => "text", :name => "search"}/
             %button.btn.btn-secondary.my-2.my-sm-0{:type => "submit"} Search
-            
+
         %ul.navbar-nav.text-right
           %li.nav-item.active
             - if user_signed_in?
@@ -30,9 +29,10 @@
             - else
               %li
                 = link_to('Login', new_user_session_path)
-    #header 
-      - if flash[:notice]
-        %p{:class => 'alert alert-info', :role => 'alert'}= flash[:notice]
-      - if flash[:warning]
-        %p{:class => 'alert alert-danger', :role => 'alert'}= flash[:warning]
-    = yield
+  %br
+  %body
+    - if flash[:notice]
+      %p{:class => 'alert alert-info flash_padding', :role => 'alert'}= flash[:notice]
+    - if flash[:warning]
+      %p{:class => 'alert alert-danger flash_padding', :role => 'alert'}= flash[:warning]
+  = yield

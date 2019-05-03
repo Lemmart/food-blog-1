@@ -10,6 +10,11 @@ $background-color: #343a40;
 .body {
     background-color: #343a40;
 }
+
+.flash_padding{
+    top: 70px;
+}
+
 .table {
     width:70%; 
     margin-left:15%; 
@@ -22,25 +27,32 @@ $background-color: #343a40;
     height: 400px;
 }
 
-.left_index {
-    // margin-top:50px;
+.filter_panel {
     margin-top: 20%;
     float:left;
-    width:100px;
+    width:25%;
     scroll-margin: infinite;
 }
 
-.right_index{
-    margin-top:50px;
-    float:right;
+.post_panel {
+    //float:right;
     width:1000px;
-    height:100px;
+    padding-top: 70px;
+}
+
+.right_button_panel{
+    width: 25%;
+}
+
+.no_hover{
+    pointer-events: none;
 }
 
 .time_buttons{
     width: 10.5%;
     position:fixed;
     align-content: center;
+    top: 25%;
 }
 
 .location_buttons{
