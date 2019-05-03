@@ -45,20 +45,9 @@
           %img.imagey{ src: "https://s3.us-east-2.amazonaws.com/frankly-food1/uploads/noimg.jpeg" }
         
         //LINK TO SHOW PAGE
-        %p.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
-        
-        //LOCATION DISPLAY
-        //.card-footer.text-muted= "#{post.location} || #{post.time} || #{post.tags} || Stars: #{post.rating}"
-        %p= "#{post.caption} #{post.tags} Stars: #{post.rating}"
-
-        - if(post.location == "Coop")
-          .btn.btn-outline-warning.btn-sm.no_hover Coop
-        - elsif(post.location == "Frank")  
-          .btn.btn-outline-info.btn-sm.no_hover Frank
-        - elsif(post.location == "Donovan's Pub")
-          .btn.btn-outline-danger.btn-sm.no_hover Donovan's Pub
-        - elsif(post.location == "Library Cafe")
-          .btn.btn-outline-success.btn-sm.no_hover Library Cafe
+        %p.card-text.titley.stars= link_to("#{post.caption}", post_path(post), method: :get)
+        %p.stars="Stars: #{post.rating}"
+        %br
 
         //TIME DISPLAY
         - if(post.time == "Breakfast")
@@ -68,8 +57,26 @@
         - elsif(post.time == "Dinner")
           .btn.btn-info.btn-sm.no_hover Dinner
         - elsif(post.time == "Snack")
-          .btn.btn-success.btn-sm.no_hover Snack
+          .btn.btn-secondary.btn-sm.no_hover Snack
 
+        //LOCATION DISPLAY
+        //.card-footer.text-muted= "#{post.location} || #{post.time} || #{post.tags} || Stars: #{post.rating}"
+        //%p= "#{link_to("#{post.caption}", post_path(post), method: :get)} #{post.tags} Stars: #{post.rating}"
+        - if(post.location == "Coop")
+          .btn.btn-outline-warning.btn-sm.no_hover Coop
+        - elsif(post.location == "Frank")  
+          .btn.btn-outline-info.btn-sm.no_hover Frank
+        - elsif(post.location == "Donovan's Pub")
+          .btn.btn-outline-danger.btn-sm.no_hover Donovan's Pub
+        - elsif(post.location == "Library Cafe")
+          .btn.btn-outline-success.btn-sm.no_hover Library Cafe
+
+       
+        
+        //TAGS DISPLAY
+        .btn.btn-outline-secondary.btn-sm.no_hover.tag_button= post.tags
+
+        %br 
         //COMMENTS
         .card-footer.text-muted
           -post.comments.each do |c|
