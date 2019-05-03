@@ -7,29 +7,30 @@
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
   %body
-    %nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
-      %button.navbar-toggler{"aria-controls" => "navbarColor03", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarColor03", "data-toggle" => "collapse", :type => "button"}
-        %span.navbar-toggler-icon
-      #navbarColor03.collapse.navbar-collapse
-        %ul.navbar-nav.mr-auto
-          %li.nav-item
-            %a.nav-link{:href => posts_path} Frank.ly
-          %li.nav-item
-            %a.nav-link{:href => "/about"} About
+    - if !current_page?('/users/sign_in')
+      %nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
+        %button.navbar-toggler{"aria-controls" => "navbarColor03", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarColor03", "data-toggle" => "collapse", :type => "button"}
+          %span.navbar-toggler-icon
+        #navbarColor03.collapse.navbar-collapse
+          %ul.navbar-nav.mr-auto
+            %li.nav-item
+              %a.nav-link{:href => posts_path} Frank.ly
+            %li.nav-item
+              %a.nav-link{:href => "/about"} About
 
-        -if current_page?(posts_path) || current_page?('/')
-          %form.form-inline.my-2.my-lg-0.right-align
-            %input.form-control.mr-sm-2{:placeholder => "#search_tag", :type => "text", :name => "search"}/
-            %button.btn.btn-secondary.my-2.my-sm-0{:type => "submit"} Search
+          -if current_page?(posts_path) || current_page?('/')
+            %form.form-inline.my-2.my-lg-0.right-align
+              %input.form-control.mr-sm-2{:placeholder => "#search_tag", :type => "text", :name => "search"}/
+              %button.btn.btn-secondary.my-2.my-sm-0{:type => "submit"} Search
 
-        %ul.navbar-nav.text-right
-          %li.nav-item.active
-            - if user_signed_in?
-              %li.logout-button
-                = link_to('Logout', destroy_user_session_path, method: :delete)
-            - else
-              %li
-                = link_to('Login', new_user_session_path)
+          %ul.navbar-nav.text-right
+            %li.nav-item.active
+              - if user_signed_in?
+                %li.logout-button
+                  = link_to('Logout', destroy_user_session_path, method: :delete)
+              - else
+                %li
+                  = link_to('Login', new_user_session_path)
   %br
   
     - if flash[:notice]
