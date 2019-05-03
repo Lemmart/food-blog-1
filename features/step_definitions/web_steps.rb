@@ -322,6 +322,7 @@ end
 ###################
 
 When /^(?:|I )fill in the following search term: "(.*)"$/ do |search_term|
+  byebug
   fill_in 'search', :with => search_term
   click_on 'Search'
 end
