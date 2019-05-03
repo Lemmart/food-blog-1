@@ -45,30 +45,30 @@
           %img.imagey{ src: "https://s3.us-east-2.amazonaws.com/frankly-food1/uploads/noimg.jpeg" }
         
         //LINK TO SHOW PAGE
-        //%p.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
+        %p.card-text.titley= link_to("#{post.caption}", post_path(post), method: :get)
         
         //LOCATION DISPLAY
         //.card-footer.text-muted= "#{post.location} || #{post.time} || #{post.tags} || Stars: #{post.rating}"
-        %p= "#{post.caption} #{post.tags}"
+        %p= "#{post.caption} #{post.tags} Stars: #{post.rating}"
 
         - if(post.location == "Coop")
-          %button.btn.btn-outline-warning.btn-sm.no_hover Coop
+          .btn.btn-outline-warning.btn-sm.no_hover Coop
         - elsif(post.location == "Frank")  
-          %button.btn.btn-outline-info.btn-sm.no_hover Frank
+          .btn.btn-outline-info.btn-sm.no_hover Frank
         - elsif(post.location == "Donovan's Pub")
-          %button.btn.btn-outline-danger.btn-sm.no_hover Donovan's Pub
+          .btn.btn-outline-danger.btn-sm.no_hover Donovan's Pub
         - elsif(post.location == "Library Cafe")
-          %button.btn.btn-outline-success.btn-sm.no_hover Library Cafe
+          .btn.btn-outline-success.btn-sm.no_hover Library Cafe
 
         //TIME DISPLAY
         - if(post.time == "Breakfast")
-          %button.btn.btn-warning.btn-sm.no_hover Breakfast
+          .btn.btn-warning.btn-sm.no_hover Breakfast
         - elsif(post.time == "Lunch")  
-          %button.btn.btn-danger.btn-sm.no_hover Lunch
+          .btn.btn-danger.btn-sm.no_hover Lunch
         - elsif(post.time == "Dinner")
-          %button.btn.btn-info.btn-sm.no_hover Dinner
+          .btn.btn-info.btn-sm.no_hover Dinner
         - elsif(post.time == "Snack")
-          %button.btn.btn-success.btn-sm.no_hover Snack
+          .btn.btn-success.btn-sm.no_hover Snack
 
         //COMMENTS
         .card-footer.text-muted
